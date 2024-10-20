@@ -20,22 +20,20 @@ ext {
 sourceCompatibility = '21'
 targetCompatibility = '21'
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
   options.encoding = 'UTF-8'
 }
 
 application {
-  mainModule = 'bsu.cs222.finalprojectaiimagegenerator'
-  mainClass = 'bsu.cs222.finalprojectaiimagegenerator.HelloApplication'
+  mainClass = 'bsu.edu.cs222.Application'
 }
 
 javafx {
-  version = '21'
+  version = '21.0.2'
   modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
-
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
