@@ -42,10 +42,13 @@ public class PromptBuilderTest {
         characteristics.setArtStyle("black and white");
         characteristics.setCharacterType("enemy");
         characteristics.setGameType("FPS");
+        characteristics.setSpecies("Human");
+        characteristics.setSkinColor("White");
 
         String prompt = promptBuilder.buildPrompt();
         assertEquals("A 25 year old male Caucasian, with brown hair and blue eyes, having a athletic body style. " +
-                "The character is depicted in a black and white art style, and is a enemy in a FPS game.", prompt);
+                "The character is depicted in a black and white art style, and is a enemy in a FPS game. " +
+                "Human is the species. White is the color of their skin.", prompt);
     }
 
     @Test
@@ -53,9 +56,12 @@ public class PromptBuilderTest {
         characteristics.setGameCharacter(true);
         characteristics.setArtStyle("black and white");
         characteristics.setCharacterType("enemy");
+        characteristics.setSpecies("Human");
+        characteristics.setSkinColor("White");
 
         String prompt = promptBuilder.buildPrompt();
         assertEquals("A 25 year old male Caucasian, with brown hair and blue eyes, having a athletic body style. " +
-                "The character is depicted in a black and white art style, and is a enemy in an unspecified type of game.", prompt);
+                "The character is depicted in a black and white art style, and is a enemy in an unspecified type of game. " +
+                "Human is the species. White is the color of their skin.", prompt);
     }
 }
