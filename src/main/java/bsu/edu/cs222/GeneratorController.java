@@ -11,7 +11,7 @@ public class GeneratorController {
     GUIUtilities guiUtilities = new GUIUtilities();
 
     @FXML
-    private TextField txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle, txtArtStyle, txtCharacterType, txtGameType;
+    private TextField txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle, txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor;
 
     @FXML
     private Button btnGenerate;
