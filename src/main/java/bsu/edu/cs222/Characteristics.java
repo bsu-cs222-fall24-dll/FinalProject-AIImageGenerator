@@ -1,6 +1,7 @@
 package bsu.edu.cs222;
 
 public class Characteristics {
+    // Default / suspect characteristics
     private String sex;
     private String race;
     private String age;
@@ -8,6 +9,7 @@ public class Characteristics {
     private String eyeColor;
     private String bodyStyle;
 
+    // Game character characteristics
     private boolean isGameCharacter = false;
     private String artStyle;
     private String characterType;
