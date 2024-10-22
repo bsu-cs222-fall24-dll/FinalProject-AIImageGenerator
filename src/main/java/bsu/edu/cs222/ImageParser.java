@@ -1,4 +1,4 @@
-package bsu.cs222.finalprojectaiimagegenerator;
+package bsu.edu.cs222;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
