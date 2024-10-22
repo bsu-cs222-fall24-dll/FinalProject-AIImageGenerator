@@ -12,9 +12,9 @@ class ImageFetcherTest {
     @Test
     void testCreateUrl() throws IOException, URISyntaxException {
         ImageFetcher fetcher = new ImageFetcher();
-        String searchInput = "red xbox";
+        String searchInput = "red_xbox";
         URL url = fetcher.createUrl(searchInput);
-        String expectedUrl = "https://image.pollinations.ai/prompt/red%20xbox";
+        String expectedUrl = "https://image.pollinations.ai/prompt/red_xbox";
         assertEquals(expectedUrl, url.toString());
     }
 }
