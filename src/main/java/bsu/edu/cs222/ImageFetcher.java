@@ -1,4 +1,4 @@
-package bsu.cs222.finalprojectaiimagegenerator;
+package bsu.edu.cs222;
 
 import java.io.IOException;
 import java.io.InputStream;

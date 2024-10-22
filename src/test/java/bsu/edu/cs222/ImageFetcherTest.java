@@ -1,6 +1,5 @@
-package bsu.cs222;
+package bsu.edu.cs222;
 
-import bsu.cs222.finalprojectaiimagegenerator.ImageFetcher;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.net.URISyntaxException;
