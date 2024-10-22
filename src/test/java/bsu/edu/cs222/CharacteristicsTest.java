@@ -9,7 +9,7 @@ public class CharacteristicsTest {
 
     @BeforeEach
     public void setUp() {
-        characteristics = new Characteristics("male", "Caucasian", "25", "brown", "blue", "athletic", "black and white", "enemy", "FPS");
+        characteristics = new Characteristics("male", "Caucasian", "25", "brown", "blue", "athletic", "black and white", "enemy", "FPS","Human","white");
     }
 
     @Test
