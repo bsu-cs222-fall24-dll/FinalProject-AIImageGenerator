@@ -97,6 +97,7 @@ public class Characteristics {
         this.gameType = gameType;
     }
 
+
     public String getSpecies() {
         return species;
     }
