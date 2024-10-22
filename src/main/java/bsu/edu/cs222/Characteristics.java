@@ -14,6 +14,8 @@ public class Characteristics {
     private String artStyle;
     private String characterType;
     private String gameType;
+    private String species;
+    private String skinColor;
 
     public String getSex() {
         return sex;
@@ -95,6 +97,22 @@ public class Characteristics {
         this.gameType = gameType;
     }
 
+    public String getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public String getSkinColor() {
+        return skinColor;
+    }
+
+    public void setSkinColor(String skinColor) {
+        this.skinColor = skinColor;
+    }
+
     public Characteristics(String sex, String race, String age, String hairColor, String eyeColor, String bodyStyle) {
         this.sex = sex;
         this.race = race;
@@ -104,12 +122,14 @@ public class Characteristics {
         this.bodyStyle = bodyStyle;
     }
 
-    public Characteristics(String sex, String race, String age, String hairColor, String eyeColor, String bodyStyle, String artStyle, String characterType, String gameType) {
+    public Characteristics(String sex, String race, String age, String hairColor, String eyeColor, String bodyStyle, String artStyle, String characterType, String gameType, String species, String skinColor) {
         this(sex, race, age, hairColor, eyeColor, bodyStyle);
 
         this.isGameCharacter = true;
         this.artStyle = artStyle;
         this.characterType = characterType;
         this.gameType = gameType;
+        this.species = species;
+        this.skinColor= skinColor;
     }
 }

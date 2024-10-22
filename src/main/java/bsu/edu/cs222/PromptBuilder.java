@@ -31,8 +31,10 @@ public class PromptBuilder {
             if (characteristics.getArtStyle() != null) prompt.append(characteristics.getArtStyle()).append(" art style, ");
             if (characteristics.getCharacterType() != null) prompt.append("and is a ").append(characteristics.getCharacterType()).append(" ");
 
-            if (characteristics.getGameType() != null) prompt.append("in a ").append(characteristics.getGameType()).append(" game.");
-            else prompt.append("in an unspecified type of game.");
+            if (characteristics.getGameType() != null) prompt.append("in a ").append(characteristics.getGameType()).append(" game. ");
+            else prompt.append("in an unspecified type of game. ");
+            if (characteristics.getSpecies() != null) prompt.append(characteristics.getSpecies()).append(" is the species. ");
+            if (characteristics.getSkinColor() != null) prompt.append(characteristics.getSkinColor()).append(" is the color of their skin.");
         }
 
         return prompt.toString();
