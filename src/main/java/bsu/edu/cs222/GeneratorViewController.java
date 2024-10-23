@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 
 import java.io.InputStream;
 
@@ -26,12 +27,19 @@ public class GeneratorViewController {
     private FlowPane fpGameCharacterCharacteristics;
 
     @FXML
-    private void cbGameCharacterOnActionHandler() {
+    private GridPane gpGeneratorViewContainer;
+
+    private void setDisableInteraction(boolean isDisabled) {
+        gpGeneratorViewContainer.setDisable(!gpGeneratorViewContainer.disabledProperty().get());
+    }
+
+    @FXML
+    private void toggleGameCharacterCharacteristicsInteraction() {
         fpGameCharacterCharacteristics.setDisable(!cbGameCharacter.isSelected());
     }
 
     @FXML
-    private void btnGenerateOnAction() {
+    private void generateAndSetImage() {
         InputStream imageInputStream;
 
         String[] arguments = {txtSex.getText(), txtRace.getText(), txtAge.getText(), txtHairColor.getText(),
@@ -42,14 +50,19 @@ public class GeneratorViewController {
         for (int i = 0; i < arguments.length ; i++) arguments[i] = arguments[i].trim();
 
         try {
+            setDisableInteraction(true);
+
             imageInputStream = aiImageController.getImage(cbGameCharacter.isSelected(), arguments);
             imgAiImage.setImage(new Image(imageInputStream));
         } catch (Exception e) {
             viewUtilities.showErrorDialogBox(e.getClass().toString(), e.getMessage());
+        } finally {
+            setDisableInteraction(false);
         }
     }
+
     @FXML
-    private void btnClearOnAction(){
+    private void clearCharacteristics(){
         txtSex.setText("");
         txtRace.setText("");
         txtAge.setText("");
