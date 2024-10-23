@@ -30,7 +30,7 @@ public class GeneratorViewController {
     private GridPane gpGeneratorViewContainer;
 
     private void setDisableInteraction(boolean isDisabled) {
-        gpGeneratorViewContainer.setDisable(!gpGeneratorViewContainer.disabledProperty().get());
+        gpGeneratorViewContainer.setDisable(isDisabled);
     }
 
     @FXML

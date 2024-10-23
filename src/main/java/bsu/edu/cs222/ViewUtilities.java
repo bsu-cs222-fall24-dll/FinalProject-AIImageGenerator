@@ -17,8 +17,4 @@ public class ViewUtilities {
     void showErrorDialogBox(String title, String message) {
         showAlert(Alert.AlertType.ERROR, title, message);
     }
-
-    void showInfoDialogBox(String message) {
-        showAlert(Alert.AlertType.INFORMATION, "Information", message);
-    }
 }
