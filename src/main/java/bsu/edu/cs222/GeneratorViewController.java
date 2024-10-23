@@ -48,4 +48,18 @@ public class GeneratorViewController {
             viewUtilities.showErrorDialogBox(e.getClass().toString(), e.getMessage());
         }
     }
+    @FXML
+    private void btnClearOnAction(){
+        txtSex.setText("");
+        txtRace.setText("");
+        txtAge.setText("");
+        txtHairColor.setText("");
+        txtEyeColor.setText("");
+        txtBodyStyle.setText("");
+        txtArtStyle.setText("");
+        txtCharacterType.setText("");
+        txtGameType.setText("");
+        txtSpecies.setText("");
+        txtSkinColor.setText("");
+    }
 }
