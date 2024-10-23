@@ -4,8 +4,8 @@ import javafx.scene.control.Alert;
 import javafx.stage.StageStyle;
 
 public class ViewUtilities {
-    private void showAlert(Alert.AlertType type, String title, String message) {
-        Alert alert = new Alert(type);
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initStyle(StageStyle.DECORATED);
         alert.setTitle(title);
         alert.setHeaderText(title);
@@ -15,6 +15,6 @@ public class ViewUtilities {
     }
 
     void showErrorDialogBox(String title, String message) {
-        showAlert(Alert.AlertType.ERROR, title, message);
+        showAlert(title, message);
     }
 }
