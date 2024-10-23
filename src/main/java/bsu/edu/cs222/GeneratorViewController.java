@@ -13,8 +13,8 @@ import java.io.InputStream;
 
 //import java.awt.*;
 
-public class GeneratorController {
-    GUIUtilities guiUtilities = new GUIUtilities();
+public class GeneratorViewController {
+    ViewUtilities viewUtilities = new ViewUtilities();
     AIImageController aiImageController = new AIImageController();
 
     @FXML
@@ -22,9 +22,6 @@ public class GeneratorController {
 
     @FXML
     private ImageView imgAiImage;
-
-    @FXML
-    private Button btnGenerate;
 
     @FXML
     private CheckBox cbGameCharacter;
