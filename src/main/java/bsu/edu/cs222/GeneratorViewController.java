@@ -1,8 +1,6 @@
 package bsu.edu.cs222;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -10,8 +8,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.image.Image;
 
 import java.io.InputStream;
-
-//import java.awt.*;
 
 public class GeneratorViewController {
     ViewUtilities viewUtilities = new ViewUtilities();
@@ -30,18 +26,26 @@ public class GeneratorViewController {
     private FlowPane fpGameCharacterCharacteristics;
 
     @FXML
-    private void cbGameCharacterOnActionHandler(ActionEvent actionEvent) {
+    private void cbGameCharacterOnActionHandler() {
         fpGameCharacterCharacteristics.setDisable(!cbGameCharacter.isSelected());
     }
 
     @FXML
-    private void btnGenerateOnAction(ActionEvent actionEvent) {
+    private void btnGenerateOnAction() {
         InputStream imageInputStream;
 
-        String[] arguments = {txtSex.getText(), txtRace.getText(), txtAge.getText(), txtHairColor.getText(), txtEyeColor.getText(), txtBodyStyle.getText()};
-        String[] gameCharacterArguments = {txtArtStyle.getText(), txtCharacterType.getText(), txtGameType.getText()};
+        String[] arguments = {txtSex.getText(), txtRace.getText(), txtAge.getText(), txtHairColor.getText(),
+                txtEyeColor.getText(), txtBodyStyle.getText(), txtArtStyle.getText(), txtCharacterType.getText(),
+                txtGameType.getText(), txtSpecies.getText(), txtSkinColor.getText()};
 
-        imageInputStream = aiImageController.getImage(cbGameCharacter.isSelected(), txtSex.getText(), txtRace.getText(), txtAge.getText(), txtHairColor.getText(), txtEyeColor.getText(), txtBodyStyle.getText(), txtArtStyle.getText(), txtCharacterType.getText(), txtGameType.getText(), txtSpecies.getText(), txtSkinColor.getText());
-        imgAiImage.setImage(new Image(imageInputStream));
+        // Deletes unneeded whitespace in the arguments
+        for (int i = 0; i < arguments.length ; i++) arguments[i] = arguments[i].trim();
+
+        try {
+            imageInputStream = aiImageController.getImage(cbGameCharacter.isSelected(), arguments);
+            imgAiImage.setImage(new Image(imageInputStream));
+        } catch (Exception e) {
+            viewUtilities.showErrorDialogBox(e.getClass().toString(), e.getMessage());
+        }
     }
 }
