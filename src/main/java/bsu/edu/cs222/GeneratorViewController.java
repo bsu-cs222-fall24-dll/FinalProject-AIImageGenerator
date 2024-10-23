@@ -40,8 +40,6 @@ public class GeneratorViewController {
 
     @FXML
     private void generateAndSetImage() {
-        InputStream imageInputStream;
-
         String[] arguments = {txtSex.getText(), txtRace.getText(), txtAge.getText(), txtHairColor.getText(),
                 txtEyeColor.getText(), txtBodyStyle.getText(), txtArtStyle.getText(), txtCharacterType.getText(),
                 txtGameType.getText(), txtSpecies.getText(), txtSkinColor.getText()};
@@ -52,7 +50,7 @@ public class GeneratorViewController {
         try {
             setDisableInteraction(true);
 
-            imageInputStream = aiImageController.getImage(cbGameCharacter.isSelected(), arguments);
+            InputStream imageInputStream = aiImageController.getImage(cbGameCharacter.isSelected(), arguments);
             imgAiImage.setImage(new Image(imageInputStream));
         } catch (Exception e) {
             viewUtilities.showErrorDialogBox(e.getClass().toString(), e.getMessage());
