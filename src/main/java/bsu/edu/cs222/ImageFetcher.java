@@ -6,7 +6,6 @@ import java.net.*;
 import java.nio.charset.StandardCharsets;
 
 public class ImageFetcher {
-
     public URL createUrl(String searchInput) throws IOException, URISyntaxException {
         String encodedSearchInput = URLEncoder.encode(searchInput, StandardCharsets.UTF_8);
         String apiUrl = "https://image.pollinations.ai/prompt/" + encodedSearchInput;

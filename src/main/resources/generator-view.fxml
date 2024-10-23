@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.GeneratorController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.GeneratorViewController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="10.0" prefWidth="340.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="309.0" />
@@ -19,7 +19,7 @@
    <children>
       <FlowPane prefHeight="360.0" prefWidth="280.0" vgap="50.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="RIGHT" GridPane.rowSpan="3">
          <children>
-            <ImageView fitHeight="310.0" fitWidth="307.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgAiImage" fitHeight="310.0" fitWidth="307.0" pickOnBounds="true" preserveRatio="true" />
             <FlowPane hgap="20.0" prefHeight="45.0" prefWidth="295.0">
                <children>
                   <Button fx:id="btnGenerate" mnemonicParsing="false" onAction="#btnGenerateOnAction" prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #00AB66;" text="Generate Image" textFill="WHITE" />
