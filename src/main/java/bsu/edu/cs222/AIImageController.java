@@ -13,17 +13,18 @@ public class AIImageController {
     ImageFetcher imageFetcher = new ImageFetcher();
     InputStream inputStream;
 
-    private void checkForEmptyFields(String[] args) {
+     void checkForEmptyFields(String[] args) {
         Set<String> argSet = new HashSet<>(Arrays.asList(args));
         argSet.removeIf(arg -> Objects.equals(arg, ""));
 
         if (argSet.isEmpty()) throw new IllegalArgumentException("Need at least one argument.");
     }
 
-    private Characteristics getCharacteristicsFromArgs(boolean isGameCharacter, String[] args) {
+    Characteristics getCharacteristicsFromArgs(boolean isGameCharacter, String[] args) {
         checkForEmptyFields(args);
 
-        if (isGameCharacter) return new Characteristics(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10]);
+        if (isGameCharacter) return new Characteristics(args[0], args[1], args[2], args[3], args[4],
+                args[5], args[6], args[7], args[8], args[9], args[10]);
         else return new Characteristics(args[0], args[1], args[2], args[3], args[4], args[5]);
     }
 
