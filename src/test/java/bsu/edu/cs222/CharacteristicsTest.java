@@ -4,12 +4,31 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+
 public class CharacteristicsTest {
     Characteristics characteristics;
 
+    public static Characteristics getCharacteristics() {
+        HashMap<String, String> characteristicsArgs = new HashMap<>();
+        characteristicsArgs.put("sex", "male");
+        characteristicsArgs.put("race", "Caucasian");
+        characteristicsArgs.put("age", "25");
+        characteristicsArgs.put("hairColor", "brown");
+        characteristicsArgs.put("eyeColor", "blue");
+        characteristicsArgs.put("bodyStyle", "athletic");
+        characteristicsArgs.put("artStyle", "black and white");
+        characteristicsArgs.put("characterType", "enemy");
+        characteristicsArgs.put("gameType", "FPS");
+        characteristicsArgs.put("species", "Human");
+        characteristicsArgs.put("skinColor", "white");
+
+        return new Characteristics(characteristicsArgs, true);
+    }
+
     @BeforeEach
     public void setUp() {
-        characteristics = new Characteristics("male", "Caucasian", "25", "brown", "blue", "athletic", "black and white", "enemy", "FPS","Human","white");
+        characteristics = getCharacteristics();
     }
 
     @Test
@@ -19,84 +38,38 @@ public class CharacteristicsTest {
 
     @Test
     public void testGetSex() {
-        assertEquals("male", characteristics.getSex());
+        assertEquals("male", characteristics.sex());
     }
     @Test
     public void testGetRace() {
-        assertEquals("Caucasian", characteristics.getRace());
+        assertEquals("Caucasian", characteristics.race());
     }
     @Test
     public void testGetAge() {
-        assertEquals("25", characteristics.getAge());
+        assertEquals("25", characteristics.age());
     }
     @Test
     public void testGetHairColor() {
-        assertEquals("brown", characteristics.getHairColor());
+        assertEquals("brown", characteristics.hairColor());
     }
     @Test
     public void testGetEyeColor() {
-        assertEquals("blue", characteristics.getEyeColor());
+        assertEquals("blue", characteristics.eyeColor());
     }
     @Test
     public void testGetBodyStyle() {
-        assertEquals("athletic", characteristics.getBodyStyle());
+        assertEquals("athletic", characteristics.bodyStyle());
     }
     @Test
     public void testGetArtStyle() {
-        assertEquals("black and white", characteristics.getArtStyle());
+        assertEquals("black and white", characteristics.artStyle());
     }
     @Test
     public void testGetCharacterType() {
-        assertEquals("enemy", characteristics.getCharacterType());
+        assertEquals("enemy", characteristics.characterType());
     }
     @Test
     public void testGetGameType() {
-        assertEquals("FPS", characteristics.getGameType());
-    }
-
-    @Test
-    public void testSetSex() {
-        characteristics.setSex("female");
-        assertEquals("female", characteristics.getSex());
-    }
-    @Test
-    public void testSetRace() {
-        characteristics.setRace("asian");
-        assertEquals("asian", characteristics.getRace());
-    }
-    @Test
-    public void testSetAge() {
-        characteristics.setAge("22");
-        assertEquals("22", characteristics.getAge());
-    }
-    @Test
-    public void testSetHairColor() {
-        characteristics.setHairColor("red");
-        assertEquals("red", characteristics.getHairColor());
-    }
-    @Test
-    public void testSetEyeColor() {
-        characteristics.setEyeColor("green");
-        assertEquals("green", characteristics.getEyeColor());
-    }
-    @Test
-    public void testSetBodyStyle() {
-        characteristics.setBodyStyle("huge");
-        assertEquals("huge", characteristics.getBodyStyle());
-    }
-    @Test
-    public void testSetArtStyle() {
-        characteristics.setArtStyle("18th century");
-        assertEquals("18th century", characteristics.getArtStyle());
-    }
-    @Test
-    public void testSetCharacterType() {
-        characteristics.setCharacterType("antagonist");
-        assertEquals("antagonist", characteristics.getCharacterType());
-    }
-    @Test
-    public void testSetGameType() {
-        characteristics.setGameType("PVE");
-        assertEquals("PVE", characteristics.getGameType());
+        assertEquals("FPS", characteristics.gameType());
     }
 }

@@ -9,13 +9,15 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 
 import java.io.InputStream;
+import java.util.HashMap;
 
 public class GeneratorViewController {
     ViewUtilities viewUtilities = new ViewUtilities();
     AIImageController aiImageController = new AIImageController();
 
     @FXML
-    private TextField txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle, txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor;
+    private TextField txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
+            txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor;
 
     @FXML
     private ImageView imgAiImage;
@@ -40,23 +42,36 @@ public class GeneratorViewController {
 
     @FXML
     private void generateAndSetImage() {
-        String[] arguments = {txtSex.getText(), txtRace.getText(), txtAge.getText(), txtHairColor.getText(),
-                txtEyeColor.getText(), txtBodyStyle.getText(), txtArtStyle.getText(), txtCharacterType.getText(),
-                txtGameType.getText(), txtSpecies.getText(), txtSkinColor.getText()};
-
-        // Deletes unneeded whitespace in the arguments
-        for (int i = 0; i < arguments.length ; i++) arguments[i] = arguments[i].trim();
+        HashMap<String, String> characteristics = getCharacteristics();
 
         try {
             setDisableInteraction(true);
 
-            InputStream imageInputStream = aiImageController.getImage(cbGameCharacter.isSelected(), arguments);
+            InputStream imageInputStream = aiImageController.getImage(cbGameCharacter.isSelected(), characteristics);
             imgAiImage.setImage(new Image(imageInputStream));
         } catch (Exception e) {
             viewUtilities.showErrorDialogBox(e.getClass().toString(), e.getMessage());
         } finally {
             setDisableInteraction(false);
         }
+    }
+
+    private HashMap<String, String> getCharacteristics() {
+        HashMap<String, String> characteristics = new HashMap<>();
+
+        characteristics.put("sex", txtSex.getText());
+        characteristics.put("race", txtRace.getText());
+        characteristics.put("age", txtAge.getText());
+        characteristics.put("hairColor", txtHairColor.getText());
+        characteristics.put("eyeColor", txtEyeColor.getText());
+        characteristics.put("bodyStyle", txtBodyStyle.getText());
+        characteristics.put("artStyle", txtArtStyle.getText());
+        characteristics.put("characterType", txtCharacterType.getText());
+        characteristics.put("gameType", txtGameType.getText());
+        characteristics.put("species", txtSpecies.getText());
+        characteristics.put("skinColor", txtSkinColor.getText());
+
+        return characteristics;
     }
 
     @FXML

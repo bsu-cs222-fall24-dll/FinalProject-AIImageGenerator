@@ -10,32 +10,32 @@ public class PromptBuilder {
     public String buildPrompt() {
         StringBuilder prompt = new StringBuilder("A ");
 
-        if (characteristics.getAge() != null) prompt.append(characteristics.getAge()).append(" year old ");
-        if (characteristics.getSex() != null) prompt.append(characteristics.getSex()).append(" ");
-        if (characteristics.getRace() != null) prompt.append(characteristics.getRace()).append(", ");
-        if (characteristics.getHairColor() != null) prompt.append("with ").append(characteristics.getHairColor()).append(" hair ");
+        if (characteristics.age() != null) prompt.append(characteristics.age()).append(" year old ");
+        if (characteristics.sex() != null) prompt.append(characteristics.sex()).append(" ");
+        if (characteristics.race() != null) prompt.append(characteristics.race()).append(", ");
+        if (characteristics.hairColor() != null) prompt.append("with ").append(characteristics.hairColor()).append(" hair ");
 
-        if (characteristics.getEyeColor() != null) {
-            if (characteristics.getHairColor() != null) prompt.append("and ");
+        if (characteristics.eyeColor() != null) {
+            if (characteristics.hairColor() != null) prompt.append("and ");
             else prompt.append("with ");
 
-            prompt.append(characteristics.getEyeColor()).append(" eyes, ");
+            prompt.append(characteristics.eyeColor()).append(" eyes, ");
         }
 
-        if (characteristics.getBodyStyle() != null) prompt.append("having a ").append(characteristics.getBodyStyle()).append(" body style.");
+        if (characteristics.bodyStyle() != null) prompt.append("having a ").append(characteristics.bodyStyle()).append(" body style.");
         else prompt.append("with an undefined body style.");
 
         if (characteristics.isGameCharacter()) {
             prompt.append(" The character is depicted in a ");
 
-            if (characteristics.getArtStyle() != null) prompt.append(characteristics.getArtStyle()).append(" art style, ");
-            if (characteristics.getCharacterType() != null) prompt.append("and is a ").append(characteristics.getCharacterType()).append(" ");
+            if (characteristics.artStyle() != null) prompt.append(characteristics.artStyle()).append(" art style, ");
+            if (characteristics.characterType() != null) prompt.append("and is a ").append(characteristics.characterType()).append(" ");
           
-            if (characteristics.getGameType() != null) prompt.append("in a ").append(characteristics.getGameType()).append(" game. ");
+            if (characteristics.gameType() != null) prompt.append("in a ").append(characteristics.gameType()).append(" game. ");
             else prompt.append("in an unspecified type of game. ");
           
-            if (characteristics.getSpecies() != null) prompt.append(characteristics.getSpecies()).append(" is the species. ");
-            if (characteristics.getSkinColor() != null) prompt.append(characteristics.getSkinColor()).append(" is the color of their skin.");
+            if (characteristics.species() != null) prompt.append(characteristics.species()).append(" is the species. ");
+            if (characteristics.skinColor() != null) prompt.append(characteristics.skinColor()).append(" is the color of their skin.");
         }
 
         return prompt.toString();

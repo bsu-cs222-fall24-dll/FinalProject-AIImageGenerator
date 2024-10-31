@@ -1,136 +1,25 @@
 package bsu.edu.cs222;
 
-public class Characteristics {
-    // Default / suspect characteristics
-    private String sex;
-    private String race;
-    private String age;
-    private String hairColor;
-    private String eyeColor;
-    private String bodyStyle;
+import java.util.HashMap;
 
-    // Game character characteristics
-    private boolean isGameCharacter = false;
-    private String artStyle;
-    private String characterType;
-    private String gameType;
-    private String species;
-    private String skinColor;
+public record Characteristics(
+        String sex,
+        String race,
+        String age,
+        String hairColor,
+        String eyeColor,
+        String bodyStyle,
+        boolean isGameCharacter,
+        String artStyle,
+        String characterType,
+        String gameType,
+        String species,
+        String skinColor
+) {
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getRace() {
-        return race;
-    }
-
-    public void setRace(String race) {
-        this.race = race;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getHairColor() {
-        return hairColor;
-    }
-
-    public void setHairColor(String hairColor) {
-        this.hairColor = hairColor;
-    }
-
-    public String getEyeColor() {
-        return eyeColor;
-    }
-
-    public void setEyeColor(String eyeColor) {
-        this.eyeColor = eyeColor;
-    }
-
-    public String getBodyStyle() {
-        return bodyStyle;
-    }
-
-    public void setBodyStyle(String bodyStyle) {
-        this.bodyStyle = bodyStyle;
-    }
-
-    public boolean isGameCharacter() {
-        return isGameCharacter;
-    }
-
-    public void setGameCharacter(boolean gameCharacter) {
-        isGameCharacter = gameCharacter;
-    }
-
-    public String getArtStyle() {
-        return artStyle;
-    }
-
-    public void setArtStyle(String artStyle) {
-        this.artStyle = artStyle;
-    }
-
-    public String getCharacterType() {
-        return characterType;
-    }
-
-    public void setCharacterType(String characterType) {
-        this.characterType = characterType;
-    }
-
-    public String getGameType() {
-        return gameType;
-    }
-
-    public void setGameType(String gameType) {
-        this.gameType = gameType;
-    }
-
-
-    public String getSpecies() {
-        return species;
-    }
-
-    public void setSpecies(String species) {
-        this.species = species;
-    }
-
-    public String getSkinColor() {
-        return skinColor;
-    }
-
-    public void setSkinColor(String skinColor) {
-        this.skinColor = skinColor;
-    }
-
-    public Characteristics(String sex, String race, String age, String hairColor, String eyeColor, String bodyStyle) {
-        this.sex = sex;
-        this.race = race;
-        this.age = age;
-        this.hairColor = hairColor;
-        this.eyeColor = eyeColor;
-        this.bodyStyle = bodyStyle;
-    }
-
-    public Characteristics(String sex, String race, String age, String hairColor, String eyeColor, String bodyStyle, String artStyle, String characterType, String gameType, String species, String skinColor) {
-        this(sex, race, age, hairColor, eyeColor, bodyStyle);
-
-        this.isGameCharacter = true;
-        this.artStyle = artStyle;
-        this.characterType = characterType;
-        this.gameType = gameType;
-        this.species = species;
-        this.skinColor= skinColor;
+    public Characteristics(HashMap<String, String> arguments, boolean isGameCharacter) {
+        this(arguments.get("sex"), arguments.get("race"), arguments.get("age"), arguments.get("hairColor"),
+                arguments.get("eyeColor"), arguments.get("bodyStyle"), isGameCharacter, arguments.get("artStyle"),
+                arguments.get("characterType"), arguments.get("gameType"), arguments.get("species"), arguments.get("skinColor"));
     }
 }
