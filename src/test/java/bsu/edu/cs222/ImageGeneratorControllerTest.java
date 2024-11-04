@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
-public class AIImageControllerTest {
+public class ImageGeneratorControllerTest {
     HashMap<String, String> args;
     HashMap<String, String> emptyArgs;
-    AIImageController controller;
+    ImageGeneratorController controller;
 
     void setupArguments() {
         args = new HashMap<>();
@@ -42,7 +42,7 @@ public class AIImageControllerTest {
     
     @BeforeEach
     void setUp() {
-        controller = new AIImageController();
+        controller = new ImageGeneratorController();
         setupArguments();
     }
 

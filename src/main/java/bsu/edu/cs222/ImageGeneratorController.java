@@ -6,7 +6,7 @@ import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.util.*;
 
-public class AIImageController {
+public class ImageGeneratorController {
     ImageFetcher imageFetcher = new ImageFetcher();
     InputStream inputStream;
 

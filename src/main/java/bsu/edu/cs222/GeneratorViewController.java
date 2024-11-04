@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class GeneratorViewController {
     ViewUtilities viewUtilities = new ViewUtilities();
-    AIImageController aiImageController = new AIImageController();
+    ImageGeneratorController imageGenerator = new ImageGeneratorController();
 
     @FXML
     private TextField txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
@@ -47,7 +47,7 @@ public class GeneratorViewController {
         try {
             setDisableInteraction(true);
 
-            InputStream imageInputStream = aiImageController.getImage(cbGameCharacter.isSelected(), characteristics);
+            InputStream imageInputStream = imageGenerator.getImage(cbGameCharacter.isSelected(), characteristics);
             imgAiImage.setImage(new Image(imageInputStream));
         } catch (Exception e) {
             viewUtilities.showErrorDialogBox(e.getClass().toString(), e.getMessage());
