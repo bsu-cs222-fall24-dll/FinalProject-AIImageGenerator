@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import java.io.IOException;
 
 public class ConfigTest {
     private File tempConfigFile;
+    String testDirectoryPath;
 
     private void createTempConfigFile(boolean isInvalidFile) throws IOException {
         tempConfigFile = File.createTempFile("tempConfig", ".properties");
@@ -22,6 +24,11 @@ public class ConfigTest {
         }
 
         Config.loadProperties(tempConfigFile.getAbsolutePath());
+    }
+
+    @BeforeEach
+    public void setUp() {
+        testDirectoryPath = "testDir";
     }
 
     @AfterEach
@@ -38,6 +45,22 @@ public class ConfigTest {
     public static void cleanUp() {
         // Load default properties
         Config.loadProperties(Config.CONFIG_FILE);
+    }
+
+    @Test
+    public void testCreateDirectoryIfMissing() throws IOException {
+        Config.createDirectoryIfMissing(testDirectoryPath);
+
+        File testDirectory = new File(testDirectoryPath);
+        assertTrue(testDirectory.isDirectory());
+    }
+
+    @Test
+    public void testCreateDirectoryIfAlreadyExists() throws IOException {
+        Config.createDirectoryIfMissing(testDirectoryPath);
+
+        File testDirectory = new File(testDirectoryPath);
+        assertTrue(testDirectory.isDirectory());
     }
 
     @Test
