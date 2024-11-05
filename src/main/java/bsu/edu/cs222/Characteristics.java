@@ -1,5 +1,6 @@
 package bsu.edu.cs222;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 public record Characteristics(
@@ -15,8 +16,7 @@ public record Characteristics(
         String gameType,
         String species,
         String skinColor
-) {
-
+) implements Serializable {
     public Characteristics(HashMap<String, String> arguments, boolean isGameCharacter) {
         this(arguments.get("sex"), arguments.get("race"), arguments.get("age"), arguments.get("hairColor"),
                 arguments.get("eyeColor"), arguments.get("bodyStyle"), isGameCharacter, arguments.get("artStyle"),
