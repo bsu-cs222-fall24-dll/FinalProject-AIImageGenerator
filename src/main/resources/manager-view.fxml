@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="bsu.edu.cs222.ManagerViewController"
+            prefHeight="400.0" prefWidth="600.0">
+    <Button onAction="#switchToGeneratorViewScene" layoutX="150.0" layoutY="107.0" mnemonicParsing="false" text="switch to generator view" />
+    <Button onAction="#switchToGeneratorViewSceneWithData" layoutX="94.0" layoutY="139.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="259.0" text="switch to generator view with characteristics" />
+</AnchorPane>
