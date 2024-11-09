@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 
 public class GeneratorViewController {
+    SceneController sceneController;
     ViewUtilities viewUtilities = new ViewUtilities();
     ImageGeneratorController imageGenerator = new ImageGeneratorController();
 
@@ -56,6 +57,10 @@ public class GeneratorViewController {
         }
     }
 
+    public void setSceneController(SceneController sceneController) {
+        this.sceneController = sceneController;
+    }
+
     private HashMap<String, String> getCharacteristics() {
         HashMap<String, String> characteristics = new HashMap<>();
 
@@ -87,5 +92,23 @@ public class GeneratorViewController {
         txtGameType.setText("");
         txtSpecies.setText("");
         txtSkinColor.setText("");
+    }
+
+    void setCharacteristics(Characteristics characteristics) {
+        txtSex.setText(characteristics.sex());
+        txtRace.setText(characteristics.race());
+        txtAge.setText(characteristics.age());
+        txtHairColor.setText(characteristics.hairColor());
+        txtEyeColor.setText(characteristics.eyeColor());
+        txtBodyStyle.setText(characteristics.bodyStyle());
+        txtArtStyle.setText(characteristics.artStyle());
+        txtCharacterType.setText(characteristics.characterType());
+        txtGameType.setText(characteristics.gameType());
+        txtSpecies.setText(characteristics.species());
+        txtSkinColor.setText(characteristics.skinColor());
+    }
+
+    void setImage(InputStream imageStream) {
+        imgAiImage.setImage(new Image(imageStream));
     }
 }
