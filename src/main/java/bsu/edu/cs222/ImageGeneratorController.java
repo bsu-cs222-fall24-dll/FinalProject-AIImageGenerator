@@ -8,7 +8,8 @@ import java.util.*;
 
 public class ImageGeneratorController {
     ImageFetcher imageFetcher = new ImageFetcher();
-    InputStream inputStream;
+    ImageSaver imageSaver = new ImageSaver();
+    InputStream imageStream;
 
     void checkForEmptyFields(Map<String, String> argsMap) {
         argsMap.values().removeIf(value -> value.trim().isEmpty());
@@ -23,18 +24,29 @@ public class ImageGeneratorController {
         return new Characteristics(arguments, isGameCharacter);
     }
 
-    public InputStream getImage(boolean isGameCharacter, HashMap<String, String> arguments) throws IOException, URISyntaxException {
+    public InputStream getImageStream(boolean isGameCharacter, HashMap<String, String> arguments) throws IOException, URISyntaxException {
         Characteristics characteristics = getCharacteristicsFromArgs(isGameCharacter, arguments);
 
         PromptBuilder promptBuilder = new PromptBuilder(characteristics);
         String prompt = promptBuilder.buildPrompt();
 
         try {
-            inputStream = imageFetcher.fetchImage(prompt);
+            imageStream = imageFetcher.fetchImage(prompt);
         } catch (UnknownHostException e) {
             throw new RuntimeException("Unable to reach the internet", e);
         }
 
-        return inputStream;
+        return imageStream;
+    }
+
+    public void saveImage(String filename, HashMap<String, String> arguments, boolean isGameCharacter) {
+        if (imageStream == null) throw new RuntimeException("An image must be generated before saving!");
+
+        Characteristics characteristics = getCharacteristicsFromArgs(isGameCharacter, arguments);
+        try {
+            imageSaver.saveImageAndCharacteristics(imageStream, characteristics, filename);
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to save the file!", e);
+        }
     }
 }
