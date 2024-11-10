@@ -7,6 +7,7 @@ public class ManagerViewController {
 
     public void setSceneController(SceneController sceneController) {
         this.sceneController = sceneController;
+        sceneController.setWindowTitle("AI Image Generator Manager");
     }
 
     public Characteristics getCharacteristics() {

@@ -19,12 +19,12 @@
           fx:controller="bsu.edu.cs222.GeneratorViewController">
    <MenuBar prefHeight="25.0" prefWidth="704.0" useSystemMenuBar="true">
       <Menu mnemonicParsing="false" text="File">
-         <MenuItem mnemonicParsing="false" text="Save"/>
-         <MenuItem mnemonicParsing="false" text="Save and Exit"/>
-         <MenuItem mnemonicParsing="false" text="Exit"/>
+         <MenuItem mnemonicParsing="false" text="Save" onAction="#saveToFile"/>
+         <MenuItem mnemonicParsing="false" text="Exit" onAction="#exitToManagerView"/>
+         <MenuItem mnemonicParsing="false" text="Save and Exit" onAction="#saveAndExit"/>
       </Menu>
       <Menu mnemonicParsing="false" text="Edit">
-         <MenuItem mnemonicParsing="false" text="Change filename"/>
+         <MenuItem mnemonicParsing="false" text="Change filename" onAction="#changeFileNamePrompt"/>
       </Menu>
    </MenuBar>
    <GridPane fx:id="gpGeneratorViewContainer" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity"

@@ -17,6 +17,10 @@ public class SceneController {
         this.stage = stage;
     }
 
+    void setWindowTitle(String title) {
+        stage.setTitle(title);
+    }
+
     FXMLLoader getLoader(String sceneName) {
         return new FXMLLoader(getClass().getResource("/" + sceneName));
     }

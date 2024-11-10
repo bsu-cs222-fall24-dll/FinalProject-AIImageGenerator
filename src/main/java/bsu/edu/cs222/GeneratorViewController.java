@@ -16,6 +16,9 @@ public class GeneratorViewController {
     ViewUtilities viewUtilities = new ViewUtilities();
     ImageGeneratorController imageGenerator = new ImageGeneratorController();
 
+    String filename = "untitled";
+    Boolean fileIsSaved = false;
+
     @FXML
     private TextField txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
             txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor;
@@ -32,10 +35,6 @@ public class GeneratorViewController {
     @FXML
     private GridPane gpGeneratorViewContainer;
 
-    private void setDisableInteraction(boolean isDisabled) {
-        gpGeneratorViewContainer.setDisable(isDisabled);
-    }
-
     @FXML
     private void toggleGameCharacterCharacteristicsInteraction() {
         fpGameCharacterCharacteristics.setDisable(!cbGameCharacter.isSelected());
@@ -43,40 +42,17 @@ public class GeneratorViewController {
 
     @FXML
     private void generateAndSetImage() {
-        HashMap<String, String> characteristics = getCharacteristics();
+        HashMap<String, String> characteristics = getCharacteristicsHashMap();
 
+        setDisableInteraction(true);
         try {
-            setDisableInteraction(true);
-
-            InputStream imageInputStream = imageGenerator.getImage(cbGameCharacter.isSelected(), characteristics);
-            imgAiImage.setImage(new Image(imageInputStream));
+            InputStream imageStream = imageGenerator.getImageStream(cbGameCharacter.isSelected(), characteristics);
+            imgAiImage.setImage(new Image(imageStream));
         } catch (Exception e) {
-            viewUtilities.showErrorDialogBox(e.getClass().toString(), e.getMessage());
+            viewUtilities.showErrorDialogBox("Exception: " + e.getClass(), e.getMessage());
         } finally {
             setDisableInteraction(false);
         }
-    }
-
-    public void setSceneController(SceneController sceneController) {
-        this.sceneController = sceneController;
-    }
-
-    private HashMap<String, String> getCharacteristics() {
-        HashMap<String, String> characteristics = new HashMap<>();
-
-        characteristics.put("sex", txtSex.getText());
-        characteristics.put("race", txtRace.getText());
-        characteristics.put("age", txtAge.getText());
-        characteristics.put("hairColor", txtHairColor.getText());
-        characteristics.put("eyeColor", txtEyeColor.getText());
-        characteristics.put("bodyStyle", txtBodyStyle.getText());
-        characteristics.put("artStyle", txtArtStyle.getText());
-        characteristics.put("characterType", txtCharacterType.getText());
-        characteristics.put("gameType", txtGameType.getText());
-        characteristics.put("species", txtSpecies.getText());
-        characteristics.put("skinColor", txtSkinColor.getText());
-
-        return characteristics;
     }
 
     @FXML
@@ -92,6 +68,79 @@ public class GeneratorViewController {
         txtGameType.setText("");
         txtSpecies.setText("");
         txtSkinColor.setText("");
+    }
+
+    public void setSceneController(SceneController sceneController) {
+        this.sceneController = sceneController;
+        updateWindowTitle();
+    }
+
+    public void updateWindowTitle() {
+        String windowTitle = filename;
+        if (!fileIsSaved) windowTitle += "*";
+
+        sceneController.setWindowTitle(windowTitle);
+    }
+
+    private void setDisableInteraction(boolean isDisabled) {
+        gpGeneratorViewContainer.setDisable(isDisabled);
+    }
+
+    public void saveToFile() {
+        setDisableInteraction(true);
+        try {
+            HashMap<String, String> characteristicsHashMap = getCharacteristicsHashMap();
+            boolean isGameCharacter = cbGameCharacter.isSelected();
+
+            imageGenerator.saveImage(filename, characteristicsHashMap, isGameCharacter);
+
+            fileIsSaved = true;
+            updateWindowTitle();
+        } catch (Exception e) {
+            viewUtilities.showErrorDialogBox("Error whilst trying to save!", e.getMessage());
+        } finally {
+            setDisableInteraction(false);
+        }
+    }
+
+    public void exitToManagerView() {
+        if (!fileIsSaved) {
+            boolean userWantsToExit = viewUtilities.getConfirmationAlertResult("Unsaved work", "Are you sure you want to exit?");
+            if (!userWantsToExit) return;
+        }
+
+        sceneController.switchSceneToManagerView();
+    }
+
+    public void saveAndExit() {
+            saveToFile();
+            if (fileIsSaved) exitToManagerView();
+    }
+
+    public void changeFileNamePrompt() {
+        String input = viewUtilities.getDialogInput("Change filename", "What would you like to set the filename to?");
+        if (!(input == null || input.isEmpty())) {
+            filename = input;
+            updateWindowTitle();
+        }
+    }
+
+    private HashMap<String, String> getCharacteristicsHashMap() {
+        HashMap<String, String> characteristicsHashMap = new HashMap<>();
+
+        characteristicsHashMap.put("sex", txtSex.getText());
+        characteristicsHashMap.put("race", txtRace.getText());
+        characteristicsHashMap.put("age", txtAge.getText());
+        characteristicsHashMap.put("hairColor", txtHairColor.getText());
+        characteristicsHashMap.put("eyeColor", txtEyeColor.getText());
+        characteristicsHashMap.put("bodyStyle", txtBodyStyle.getText());
+        characteristicsHashMap.put("artStyle", txtArtStyle.getText());
+        characteristicsHashMap.put("characterType", txtCharacterType.getText());
+        characteristicsHashMap.put("gameType", txtGameType.getText());
+        characteristicsHashMap.put("species", txtSpecies.getText());
+        characteristicsHashMap.put("skinColor", txtSkinColor.getText());
+
+        return characteristicsHashMap;
     }
 
     void setCharacteristics(Characteristics characteristics) {
