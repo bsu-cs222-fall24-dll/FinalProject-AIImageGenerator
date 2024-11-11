@@ -49,4 +49,8 @@ public class ImageGeneratorController {
             throw new RuntimeException("Unable to save the file!", e);
         }
     }
+
+    public void setImageStream(InputStream imageStream) {
+        this.imageStream = imageStream;
+    }
 }
