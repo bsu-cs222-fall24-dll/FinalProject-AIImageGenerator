@@ -42,6 +42,7 @@ public class GeneratorViewController {
 
     @FXML
     private void generateAndSetImage() {
+        invalidateSaveStatus();
         HashMap<String, String> characteristics = getCharacteristicsHashMap();
 
         setDisableInteraction(true);
@@ -56,7 +57,9 @@ public class GeneratorViewController {
     }
 
     @FXML
-    private void clearCharacteristics(){
+    private void clearFields() {
+        invalidateSaveStatus();
+
         txtSex.setText("");
         txtRace.setText("");
         txtAge.setText("");
@@ -68,6 +71,15 @@ public class GeneratorViewController {
         txtGameType.setText("");
         txtSpecies.setText("");
         txtSkinColor.setText("");
+
+        imgAiImage.setImage(null);
+    }
+
+    public void invalidateSaveStatus() {
+        if (fileIsSaved) {
+            fileIsSaved = false;
+            updateWindowTitle();
+        }
     }
 
     public void setSceneController(SceneController sceneController) {
@@ -150,11 +162,15 @@ public class GeneratorViewController {
         txtHairColor.setText(characteristics.hairColor());
         txtEyeColor.setText(characteristics.eyeColor());
         txtBodyStyle.setText(characteristics.bodyStyle());
+
+        cbGameCharacter.setSelected(characteristics.isGameCharacter());
         txtArtStyle.setText(characteristics.artStyle());
         txtCharacterType.setText(characteristics.characterType());
         txtGameType.setText(characteristics.gameType());
         txtSpecies.setText(characteristics.species());
         txtSkinColor.setText(characteristics.skinColor());
+
+        fpGameCharacterCharacteristics.setDisable(!characteristics.isGameCharacter());
     }
 
     void setImage(InputStream imageStream) {

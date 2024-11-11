@@ -58,7 +58,7 @@
             <Button mnemonicParsing="false" onAction="#generateAndSetImage"
                     prefHeight="45.0" prefWidth="135.0" style="-fx-background-color: #00AB66;"
                     text="Generate Image" textFill="WHITE"/>
-            <Button mnemonicParsing="false" onAction="#clearCharacteristics" prefHeight="45.0"
+            <Button mnemonicParsing="false" onAction="#clearFields" prefHeight="45.0"
                     prefWidth="135.0" text="Clear characteristics"/>
          </FlowPane>
       </GridPane>
@@ -84,7 +84,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                </rowConstraints>
                <Label text="Sex:"/>
-               <TextField fx:id="txtSex" prefWidth="179.0" GridPane.columnIndex="1"/>
+               <TextField fx:id="txtSex" prefWidth="179.0" GridPane.columnIndex="1" onKeyTyped="#invalidateSaveStatus"/>
             </GridPane>
             <GridPane maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="279.0">
                <columnConstraints>
@@ -95,7 +95,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                </rowConstraints>
                <Label text="Race:"/>
-               <TextField fx:id="txtRace" prefWidth="179.0" GridPane.columnIndex="1"/>
+               <TextField fx:id="txtRace" prefWidth="179.0" GridPane.columnIndex="1" onKeyTyped="#invalidateSaveStatus"/>
             </GridPane>
             <GridPane maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="279.0">
                <columnConstraints>
@@ -106,7 +106,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                </rowConstraints>
                <Label text="Age:"/>
-               <TextField fx:id="txtAge" prefWidth="179.0" GridPane.columnIndex="1"/>
+               <TextField fx:id="txtAge" prefWidth="179.0" GridPane.columnIndex="1" onKeyTyped="#invalidateSaveStatus"/>
             </GridPane>
             <GridPane maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="279.0">
                <columnConstraints>
@@ -117,7 +117,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                </rowConstraints>
                <Label text="Hair color:"/>
-               <TextField fx:id="txtHairColor" prefWidth="179.0" GridPane.columnIndex="1"/>
+               <TextField fx:id="txtHairColor" prefWidth="179.0" GridPane.columnIndex="1" onKeyTyped="#invalidateSaveStatus"/>
             </GridPane>
             <GridPane maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="279.0">
                <columnConstraints>
@@ -128,7 +128,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                </rowConstraints>
                <Label text="Eye color:"/>
-               <TextField fx:id="txtEyeColor" prefWidth="179.0" GridPane.columnIndex="1"/>
+               <TextField fx:id="txtEyeColor" prefWidth="179.0" GridPane.columnIndex="1" onKeyTyped="#invalidateSaveStatus"/>
             </GridPane>
             <GridPane maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="279.0">
                <columnConstraints>
@@ -139,7 +139,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                </rowConstraints>
                <Label text="Body style:"/>
-               <TextField fx:id="txtBodyStyle" prefWidth="179.0" GridPane.columnIndex="1"/>
+               <TextField fx:id="txtBodyStyle" prefWidth="179.0" GridPane.columnIndex="1" onKeyTyped="#invalidateSaveStatus"/>
             </GridPane>
          </FlowPane>
          <FlowPane prefHeight="139.0" prefWidth="279.0" vgap="7.5">
@@ -165,7 +165,7 @@
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                   </rowConstraints>
                   <Label text="Art style:"/>
-                  <TextField fx:id="txtArtStyle" prefWidth="179.0" GridPane.columnIndex="1"/>
+                  <TextField fx:id="txtArtStyle" prefWidth="179.0" GridPane.columnIndex="1" onKeyTyped="#invalidateSaveStatus"/>
                </GridPane>
                <GridPane maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="279.0">
                   <columnConstraints>
@@ -179,7 +179,7 @@
                   </rowConstraints>
                   <Label prefHeight="17.0" prefWidth="109.0" text="Character type:"/>
                   <TextField fx:id="txtCharacterType" prefHeight="26.0" prefWidth="177.0"
-                             GridPane.columnIndex="1"/>
+                             GridPane.columnIndex="1" onKeyTyped="#invalidateSaveStatus"/>
                </GridPane>
                <GridPane maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="279.0">
                   <columnConstraints>
@@ -192,7 +192,7 @@
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                   </rowConstraints>
                   <Label text="Game type:"/>
-                  <TextField fx:id="txtGameType" prefWidth="187.0" GridPane.columnIndex="1"/>
+                  <TextField fx:id="txtGameType" prefWidth="187.0" GridPane.columnIndex="1" onKeyTyped="#invalidateSaveStatus"/>
                </GridPane>
                <GridPane layoutX="19.0" layoutY="76.0" maxWidth="1.7976931348623157E308" prefHeight="30.0"
                          prefWidth="279.0">
@@ -206,7 +206,7 @@
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                   </rowConstraints>
                   <Label text="Species:"/>
-                  <TextField fx:id="txtSpecies" prefWidth="187.0" GridPane.columnIndex="1"/>
+                  <TextField fx:id="txtSpecies" prefWidth="187.0" GridPane.columnIndex="1" onKeyTyped="#invalidateSaveStatus"/>
                </GridPane>
                <GridPane layoutX="19.0" layoutY="106.0" maxWidth="1.7976931348623157E308" prefHeight="30.0"
                          prefWidth="279.0">
@@ -220,7 +220,7 @@
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                   </rowConstraints>
                   <Label text="Skin Color:"/>
-                  <TextField fx:id="txtSkinColor" prefWidth="187.0" GridPane.columnIndex="1"/>
+                  <TextField fx:id="txtSkinColor" prefWidth="187.0" GridPane.columnIndex="1" onKeyTyped="#invalidateSaveStatus"/>
                </GridPane>
             </FlowPane>
          </FlowPane>
