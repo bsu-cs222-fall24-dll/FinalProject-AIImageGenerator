@@ -25,6 +25,18 @@ public class PromptBuilder {
         if (characteristics.bodyStyle() != null) prompt.append("having a ").append(characteristics.bodyStyle()).append(" body style.");
         else prompt.append("with an undefined body style.");
 
+        if (characteristics.hairLength() != null) prompt.append(" With ").append(characteristics.hairLength()).append(" hair,");
+        if (characteristics.eyeShape() != null) prompt.append(characteristics.eyeShape()).append(" shaped eyes,");
+        if (characteristics.eyebrowShape() != null) prompt.append(characteristics.eyebrowShape()).append(" eyebrows,");
+        if (characteristics.faceShape() != null) prompt.append(" a ").append(characteristics.faceShape()).append(" face, and");
+        if (characteristics.cheekbones() != null) prompt.append(characteristics.cheekbones()).append(" cheekbones.");
+
+
+
+
+
+
+
         if (characteristics.isGameCharacter()) {
             prompt.append(" The character is depicted in a ");
 
