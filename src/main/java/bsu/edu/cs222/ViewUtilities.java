@@ -33,6 +33,8 @@ public class ViewUtilities {
         showMessageAlert(title, message);
     }
 
+    /* Warnings about the parameters "always being" a certain value should be disregarded
+       as this is a utility function and is planned to be used more in the future.        */
     String getDialogInput(String title, String message) {
         TextInputDialog textInputDialog = new TextInputDialog();
 

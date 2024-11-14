@@ -6,14 +6,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 public class SceneController {
-    private Stage stage;
+    private final Stage stage;
 
     final private String GENERATOR_VIEW = "generator-view.fxml";
 
-    void setStage(Stage stage) {
+    public SceneController(Stage stage) {
         this.stage = stage;
     }
 
@@ -62,7 +61,7 @@ public class SceneController {
         }
     }
 
-    public void switchToGeneratorView(InputStream imageStream, Characteristics characteristics) {
+    public void switchToGeneratorView(byte[] imageData, Characteristics characteristics, String filename) {
         try {
             FXMLLoader loader = getLoader(GENERATOR_VIEW);
             Parent root = loader.load();
@@ -70,7 +69,9 @@ public class SceneController {
             GeneratorViewController controller = loader.getController();
             controller.setSceneController(this);
             controller.setCharacteristics(characteristics);
-            controller.setImage(imageStream);
+            controller.setFilename(filename);
+            controller.getImageManager().setImageData(imageData);
+            controller.displayImage(imageData);
 
             setAndShowSceneFromParent(root);
         } catch (IOException e) {

@@ -13,10 +13,12 @@ public class ImageFetcher {
         return uri.toURL();
     }
 
-    public InputStream fetchImage(String searchInput) throws IOException, URISyntaxException {
+    public byte[] fetchImage(String searchInput) throws IOException, URISyntaxException {
         URL url = createUrl(searchInput);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
-        return connection.getInputStream();
+
+        InputStream imageStream = connection.getInputStream();
+        return imageStream.readAllBytes();
     }
 }
