@@ -8,7 +8,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -23,20 +22,18 @@ class ImageLoaderTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        Path testImagePath = getSafePath(Path.of(Objects.requireNonNull(getClass().getResource("/redXbox.jpg")).getPath()));
+        Path testImagePath = Paths.get(getSafePath(Objects.requireNonNull(getClass().getResource("/redXbox.jpg")).getPath()));
         imageLoader = new ImageLoader();
         sampleImage = new ImageWithCharacteristics(Files.readAllBytes(testImagePath), CharacteristicsTest.getCharacteristics());
     }
 
-    public Path getSafePath(Path path) {
+    public String getSafePath(String pathString) {
         String os = System.getProperty("os.name").toLowerCase();
-        String pathString = path.toString();
-
         if (os.contains("win")) {
             pathString = pathString.replaceFirst("/", "");
         }
 
-        return Paths.get(pathString);
+        return pathString;
     }
 
     public ImageWithCharacteristics getTestImage() throws IOException, ClassNotFoundException {
@@ -65,7 +62,7 @@ class ImageLoaderTest {
     void testLoadImageData() throws IOException, ClassNotFoundException {
         ImageWithCharacteristics loadedImage = getTestImage();
 
-        assert Arrays.equals(sampleImage.imageData(), loadedImage.imageData());
+        assertArrayEquals(sampleImage.imageData(), loadedImage.imageData());
     }
 
     @Test
@@ -84,6 +81,9 @@ class ImageLoaderTest {
     @Test
     void testLoadFilePaths() throws IOException {
         HashMap<String, ImageWithCharacteristics> imageItems = getImageItems();
-        assert imageItems.containsKey(tempDir.toAbsolutePath() + "/image1.data") && imageItems.containsKey(tempDir.toAbsolutePath() + "/image2.data");
+        String slashChar = System.getProperty("os.name").toLowerCase().contains("win") ? "\\" : "/";
+
+        assertTrue(imageItems.containsKey(tempDir.toAbsolutePath() + slashChar + "image1.data")
+                && imageItems.containsKey(tempDir.toAbsolutePath() + slashChar + "image2.data"));
     }
 }
