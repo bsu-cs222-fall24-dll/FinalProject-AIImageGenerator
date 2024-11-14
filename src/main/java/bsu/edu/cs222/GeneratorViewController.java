@@ -55,6 +55,8 @@ public class GeneratorViewController {
             displayImage(imageManager.generateImage(isGameCharacter, characteristics));
         } catch (Exception e) {
             viewUtilities.showErrorDialogBox("Error whilst getting and fetching image!", e.getMessage());
+        } finally {
+            invalidateSaveStatus();
         }
     }
 
@@ -63,6 +65,7 @@ public class GeneratorViewController {
         invalidateSaveStatus();
         clearCharacteristicsFields(
                 txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
+                txtHairLength, txtEyeShape, txtEyebrowShape, txtFaceShape, txtCheekbones,
                 txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor
         );
         imgAiImage.setImage(null);
@@ -107,6 +110,19 @@ public class GeneratorViewController {
     @FXML
     public void invalidateSaveStatus() {
         saveStatusManager.invalidateSaveStatus();
+        updateWindowTitle();
+    }
+
+    @FXML
+    private void saveImage() {
+        HashMap<String, String> characteristics = getCharacteristicsHashMap();
+        String filename = saveStatusManager.getFilename();
+
+        try {
+            imageManager.saveImage(filename, characteristics, cbGameCharacter.isSelected());
+        } catch (Exception e) {
+            viewUtilities.showErrorDialogBox("Error saving image!", e.getMessage());
+        }
     }
 
     ImageManager getImageManager() {
@@ -136,21 +152,10 @@ public class GeneratorViewController {
         updateWindowTitle();
     }
 
-    @FXML
-    private void saveImage() {
-        HashMap<String, String> characteristics = getCharacteristicsHashMap();
-        String filename = saveStatusManager.getFilename();
-
-        try {
-            imageManager.saveImage(filename, characteristics, cbGameCharacter.isSelected());
-        } catch (Exception e) {
-            viewUtilities.showErrorDialogBox("Error saving image!", e.getMessage());
-        }
-    }
-
     private HashMap<String, String> getCharacteristicsHashMap() {
         return getCharacteristicsFromFields(
                 txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
+                txtHairLength, txtEyeShape, txtEyebrowShape, txtFaceShape, txtCheekbones,
                 txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor
         );
     }
@@ -163,11 +168,16 @@ public class GeneratorViewController {
         characteristics.put("hairColor", fields[3].getText());
         characteristics.put("eyeColor", fields[4].getText());
         characteristics.put("bodyStyle", fields[5].getText());
-        characteristics.put("artStyle", fields[6].getText());
-        characteristics.put("characterType", fields[7].getText());
-        characteristics.put("gameType", fields[8].getText());
-        characteristics.put("species", fields[9].getText());
-        characteristics.put("skinColor", fields[10].getText());
+        characteristics.put("hairLength", fields[6].getText());
+        characteristics.put("eyeShape", fields[7].getText());
+        characteristics.put("eyebrowShape", fields[8].getText());
+        characteristics.put("faceShape", fields[9].getText());
+        characteristics.put("cheekbones", fields[10].getText());
+        characteristics.put("artStyle", fields[11].getText());
+        characteristics.put("characterType", fields[12].getText());
+        characteristics.put("gameType", fields[13].getText());
+        characteristics.put("species", fields[14].getText());
+        characteristics.put("skinColor", fields[15].getText());
         return characteristics;
     }
 

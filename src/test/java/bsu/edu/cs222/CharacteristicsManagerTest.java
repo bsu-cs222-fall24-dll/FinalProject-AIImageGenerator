@@ -31,7 +31,7 @@ class CharacteristicsManagerTest {
     }
 
     @Test
-    void createCharacteristics_throwsExceptionWhenAllFieldsAreEmpty() {
+    void throwsExceptionWhenAllFieldsAreEmpty() {
         assertThrows(IllegalArgumentException.class, () ->
                         characteristicsManager.createCharacteristics(false, characteristicsMap),
                 "Expected exception when all fields are empty."
@@ -39,7 +39,7 @@ class CharacteristicsManagerTest {
     }
 
     @Test
-    void createCharacteristics_setsSexInCharacteristics() {
+    void setsSexInCharacteristics() {
         characteristicsMap.put("sex", "Male");
         Characteristics characteristics = characteristicsManager.createCharacteristics(false, characteristicsMap);
 
@@ -47,7 +47,7 @@ class CharacteristicsManagerTest {
     }
 
     @Test
-    void createCharacteristics_setsAgeInCharacteristics() {
+    void setsAgeInCharacteristics() {
         characteristicsMap.put("age", "25");
         Characteristics characteristics = characteristicsManager.createCharacteristics(false, characteristicsMap);
 
@@ -55,7 +55,7 @@ class CharacteristicsManagerTest {
     }
 
     @Test
-    void createCharacteristics_setsIsGameCharacterFlag() {
+    void setsIsGameCharacterFlag() {
         characteristicsMap.put("age", "25");
         Characteristics characteristics = characteristicsManager.createCharacteristics(true, characteristicsMap);
 

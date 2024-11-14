@@ -31,12 +31,6 @@ public class PromptBuilder {
         if (characteristics.faceShape() != null) prompt.append(" a ").append(characteristics.faceShape()).append(" face, and");
         if (characteristics.cheekbones() != null) prompt.append(characteristics.cheekbones()).append(" cheekbones.");
 
-
-
-
-
-
-
         if (characteristics.isGameCharacter()) {
             prompt.append(" The character is depicted in a ");
 
