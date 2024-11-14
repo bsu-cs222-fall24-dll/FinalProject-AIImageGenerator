@@ -10,16 +10,22 @@ public record Characteristics(
         String hairColor,
         String eyeColor,
         String bodyStyle,
+        String hairLength,
+        String eyeShape,
+        String eyebrowShape,
+        String faceShape,
+        String cheekbones,
         boolean isGameCharacter,
         String artStyle,
         String characterType,
         String gameType,
         String species,
         String skinColor
+
 ) implements Serializable {
     public Characteristics(HashMap<String, String> arguments, boolean isGameCharacter) {
         this(arguments.get("sex"), arguments.get("race"), arguments.get("age"), arguments.get("hairColor"),
-                arguments.get("eyeColor"), arguments.get("bodyStyle"), isGameCharacter, arguments.get("artStyle"),
+                arguments.get("eyeColor"), arguments.get("bodyStyle"), arguments.get("hairLength"), arguments.get("eyeShape"), arguments.get("eyebrowShape"), arguments.get("faceShape"), arguments.get("cheekbones"), isGameCharacter, arguments.get("artStyle"),
                 arguments.get("characterType"), arguments.get("gameType"), arguments.get("species"), arguments.get("skinColor"));
     }
 }

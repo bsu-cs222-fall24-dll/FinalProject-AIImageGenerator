@@ -21,6 +21,7 @@ public class GeneratorViewController {
 
     @FXML
     private TextField txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
+            txtHairLength, txtEyeShape, txtEyebrowShape, txtFaceShape, txtCheekbones,
             txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor;
 
     @FXML
@@ -66,6 +67,11 @@ public class GeneratorViewController {
         txtHairColor.setText("");
         txtEyeColor.setText("");
         txtBodyStyle.setText("");
+        txtHairLength.setText("");
+        txtEyeShape.setText("");
+        txtEyebrowShape.setText("");
+        txtFaceShape.setText("");
+        txtCheekbones.setText("");
         txtArtStyle.setText("");
         txtCharacterType.setText("");
         txtGameType.setText("");
@@ -146,6 +152,11 @@ public class GeneratorViewController {
         characteristicsHashMap.put("hairColor", txtHairColor.getText());
         characteristicsHashMap.put("eyeColor", txtEyeColor.getText());
         characteristicsHashMap.put("bodyStyle", txtBodyStyle.getText());
+        characteristicsHashMap.put("hairLength", txtHairLength.getText());
+        characteristicsHashMap.put("eyeShape", txtEyeShape.getText());
+        characteristicsHashMap.put("eyebrowShape", txtEyebrowShape.getText());
+        characteristicsHashMap.put("faceShape", txtFaceShape.getText());
+        characteristicsHashMap.put("cheekbones", txtCheekbones.getText());
         characteristicsHashMap.put("artStyle", txtArtStyle.getText());
         characteristicsHashMap.put("characterType", txtCharacterType.getText());
         characteristicsHashMap.put("gameType", txtGameType.getText());
@@ -162,6 +173,11 @@ public class GeneratorViewController {
         txtHairColor.setText(characteristics.hairColor());
         txtEyeColor.setText(characteristics.eyeColor());
         txtBodyStyle.setText(characteristics.bodyStyle());
+        txtHairLength.setText(characteristics.hairLength());
+        txtEyeShape.setText(characteristics.eyeShape());
+        txtEyebrowShape.setText(characteristics.eyebrowShape());
+        txtFaceShape.setText(characteristics.faceShape());
+        txtCheekbones.setText(characteristics.cheekbones());
 
         cbGameCharacter.setSelected(characteristics.isGameCharacter());
         txtArtStyle.setText(characteristics.artStyle());
