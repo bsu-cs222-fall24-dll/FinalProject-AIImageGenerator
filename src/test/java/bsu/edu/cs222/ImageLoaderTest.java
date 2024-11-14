@@ -23,10 +23,9 @@ class ImageLoaderTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        Path testPath = Path.of(Objects.requireNonNull(getClass().getResource("/redXbox.jpg")).getPath());
-        System.out.println(testPath);
+        Path testImagePath = getSafePath(Path.of(Objects.requireNonNull(getClass().getResource("/redXbox.jpg")).getPath()));
         imageLoader = new ImageLoader();
-        sampleImage = new ImageWithCharacteristics(Files.readAllBytes(testPath), CharacteristicsTest.getCharacteristics());
+        sampleImage = new ImageWithCharacteristics(Files.readAllBytes(testImagePath), CharacteristicsTest.getCharacteristics());
     }
 
     public Path getSafePath(Path path) {
@@ -41,7 +40,7 @@ class ImageLoaderTest {
     }
 
     public ImageWithCharacteristics getTestImage() throws IOException, ClassNotFoundException {
-        Path tempFile = getSafePath(tempDir.resolve("image1.data"));
+        Path tempFile = tempDir.resolve("image1.data");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(tempFile.toFile()))) {
             oos.writeObject(sampleImage);
         }
@@ -50,8 +49,8 @@ class ImageLoaderTest {
     }
 
     public HashMap<String, ImageWithCharacteristics> getImageItems() throws IOException {
-        Path tempFile1 = getSafePath(tempDir.resolve("image1.data"));
-        Path tempFile2 = getSafePath(tempDir.resolve("image2.data"));
+        Path tempFile1 = tempDir.resolve("image1.data");
+        Path tempFile2 = tempDir.resolve("image2.data");
 
         try (ObjectOutputStream oos1 = new ObjectOutputStream(new FileOutputStream(tempFile1.toFile()));
              ObjectOutputStream oos2 = new ObjectOutputStream(new FileOutputStream(tempFile2.toFile()))) {
