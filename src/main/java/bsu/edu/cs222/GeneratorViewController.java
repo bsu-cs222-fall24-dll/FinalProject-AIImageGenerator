@@ -20,6 +20,7 @@ public class GeneratorViewController {
 
     @FXML
     private TextField txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
+            txtHairLength, txtEyeShape, txtEyebrowShape, txtFaceShape, txtCheekbones,
             txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor;
 
     @FXML
@@ -177,6 +178,11 @@ public class GeneratorViewController {
         txtHairColor.setText(characteristics.hairColor());
         txtEyeColor.setText(characteristics.eyeColor());
         txtBodyStyle.setText(characteristics.bodyStyle());
+        txtHairLength.setText(characteristics.hairLength());
+        txtEyeShape.setText(characteristics.eyeShape());
+        txtEyebrowShape.setText(characteristics.eyebrowShape());
+        txtFaceShape.setText(characteristics.faceShape());
+        txtCheekbones.setText(characteristics.cheekbones());
 
         cbGameCharacter.setSelected(characteristics.isGameCharacter());
         txtArtStyle.setText(characteristics.artStyle());
