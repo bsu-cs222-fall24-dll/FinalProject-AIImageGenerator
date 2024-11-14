@@ -29,6 +29,7 @@ class FileFetcherTest {
         List<String> filePaths = fileFetcher.getAllFilePaths();
 
         assertEquals(List.of(file2.toString(), file1.toString()), filePaths);
+        assert filePaths.contains(file2.toString()) && filePaths.contains(file1.toString());
     }
 
     @Test
