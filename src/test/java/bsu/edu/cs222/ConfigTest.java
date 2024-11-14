@@ -72,7 +72,7 @@ public class ConfigTest {
     @Test
     public void testGetDefaultSaveDirectory() throws IOException {
         createTempConfigFile(true);
-        assertEquals("./saved-images", Config.getSaveDirectory());
+        assertEquals("./out/saved-images", Config.getSaveDirectory());
     }
 
     @Test

@@ -6,14 +6,13 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class Config {
-    public static final String CONFIG_FILE = "config.properties"; // Keep this as default
+    public static final String CONFIG_FILE = "config.properties";
     private static final Properties properties = new Properties();
 
     static {
         loadProperties(CONFIG_FILE);
     }
 
-    // New constructor for testing with different file names
     public static void loadProperties(String fileName) {
         try (FileInputStream input = new FileInputStream(fileName)) {
             properties.load(input);
@@ -26,7 +25,7 @@ public class Config {
     public static void createDirectoryIfMissing(String saveDirectoryPath) throws IOException {
         File directory = new File(saveDirectoryPath);
         if (!directory.exists()) {
-            boolean created = directory.mkdirs(); // Create the directory, including any necessary but nonexistent parent directories
+            boolean created = directory.mkdirs();
             if (!created) {
                 throw new IOException("Failed to create directory: " + saveDirectoryPath);
             }
@@ -34,7 +33,7 @@ public class Config {
     }
 
     public static String getSaveDirectory() throws IOException {
-        String saveDirectoryPath = properties.getProperty("save.directory", "./saved-images");
+        String saveDirectoryPath = properties.getProperty("save.directory", "./out/saved-images");
         createDirectoryIfMissing(saveDirectoryPath);
 
         return saveDirectoryPath;
