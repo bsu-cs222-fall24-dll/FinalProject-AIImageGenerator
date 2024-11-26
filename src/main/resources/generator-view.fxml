@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<FlowPane prefHeight="470.0" prefWidth="683.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.GeneratorViewController">
+<FlowPane fx:id="fpGeneratorViewContainer" prefHeight="470.0" prefWidth="683.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsu.edu.cs222.GeneratorViewController">
    <MenuBar maxHeight="-Infinity" prefHeight="25.0" prefWidth="704.0">
       <Menu mnemonicParsing="false" text="File">
          <MenuItem mnemonicParsing="false" onAction="#saveToFile" text="Save" />
@@ -27,7 +27,7 @@
          <MenuItem mnemonicParsing="false" onAction="#changeFileNamePrompt" text="Change filename" />
       </Menu>
    </MenuBar>
-   <GridPane fx:id="gpGeneratorViewContainer" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="696.0">
+   <GridPane hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="696.0">
       <columnConstraints>
          <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="10.0" prefWidth="340.0" />
          <ColumnConstraints hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="309.0" />

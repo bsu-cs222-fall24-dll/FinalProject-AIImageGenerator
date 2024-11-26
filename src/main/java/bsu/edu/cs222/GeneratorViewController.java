@@ -1,12 +1,12 @@
 package bsu.edu.cs222;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -30,10 +30,7 @@ public class GeneratorViewController {
     private CheckBox cbGameCharacter;
 
     @FXML
-    private FlowPane fpGameCharacterCharacteristics;
-
-    @FXML
-    private GridPane gpGeneratorViewContainer;
+    private FlowPane fpGeneratorViewContainer, fpGameCharacterCharacteristics;
 
     public GeneratorViewController() {
         this.imageManager = new ImageManager();
@@ -48,16 +45,26 @@ public class GeneratorViewController {
 
     @FXML
     private void generateAndSetImage() {
+        setDisableInteraction(true);
         HashMap<String, String> characteristics = getCharacteristicsHashMap();
 
-        try {
-            boolean isGameCharacter = cbGameCharacter.isSelected();
-            displayImage(imageManager.generateImage(isGameCharacter, characteristics));
-        } catch (Exception e) {
-            viewUtilities.showErrorDialogBox("Error whilst getting and fetching image!", e.getMessage());
-        } finally {
-            invalidateSaveStatus();
-        }
+        // Fetches image in a thread, preventing application from freezing.
+        // Utilizes "Platform.runLater(<lambda function>)" to run non-thread safe logic like JavaFX code, see README.
+        new Thread(() -> {
+            try {
+                boolean isGameCharacter = cbGameCharacter.isSelected();
+                byte[] image = imageManager.generateImage(isGameCharacter, characteristics);
+
+                Platform.runLater(() -> displayImage(image));
+            } catch (Exception e) {
+                Platform.runLater(() -> viewUtilities.showErrorDialogBox("Error whilst getting and fetching image!", e.toString()));
+            } finally {
+                Platform.runLater(() -> {
+                    invalidateSaveStatus();
+                    setDisableInteraction(false);
+                });
+            }
+        }).start();
     }
 
     @FXML
@@ -139,7 +146,7 @@ public class GeneratorViewController {
     }
 
     private void setDisableInteraction(boolean isDisabled) {
-        gpGeneratorViewContainer.setDisable(isDisabled);
+        fpGeneratorViewContainer.setDisable(isDisabled);
     }
 
     public void displayImage(byte[] imageData) {
