@@ -120,18 +120,6 @@ public class GeneratorViewController {
         updateWindowTitle();
     }
 
-    @FXML
-    private void saveImage() {
-        HashMap<String, String> characteristics = getCharacteristicsHashMap();
-        String filename = saveStatusManager.getFilename();
-
-        try {
-            imageManager.saveImage(filename, characteristics, cbGameCharacter.isSelected());
-        } catch (Exception e) {
-            viewUtilities.showErrorDialogBox("Error saving image!", e.getMessage());
-        }
-    }
-
     ImageManager getImageManager() {
         return imageManager;
     }
