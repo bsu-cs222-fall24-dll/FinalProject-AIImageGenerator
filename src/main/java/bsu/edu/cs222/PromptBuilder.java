@@ -44,7 +44,7 @@ public class PromptBuilder {
             if (characteristics.skinColor() != null) prompt.append(characteristics.skinColor()).append(" is the color of their skin.");
         }
 
-        if (characteristics.promptBox() != null) prompt.append(characteristics.promptBox());
+        if (additionalChar.promptBox() != null) prompt.append(characteristics.promptBox());
 
         return prompt.toString();
     }

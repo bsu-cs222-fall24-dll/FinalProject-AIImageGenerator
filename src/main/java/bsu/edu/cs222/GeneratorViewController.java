@@ -3,6 +3,7 @@ package bsu.edu.cs222;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,7 +22,10 @@ public class GeneratorViewController {
     @FXML
     private TextField txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
             txtHairLength, txtEyeShape, txtEyebrowShape, txtFaceShape, txtCheekbones,
-            txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor, txtPromptBox;
+            txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor;
+
+    @FXML
+    private TextArea txtPromptBox;
 
     @FXML
     private ImageView imgAiImage;
@@ -47,13 +51,14 @@ public class GeneratorViewController {
     private void generateAndSetImage() {
         setDisableInteraction(true);
         HashMap<String, String> characteristics = getCharacteristicsHashMap();
+        HashMap<String, String> additionalChar = getAdditionalCharHashMap();
 
         // Fetches image in a thread, preventing application from freezing.
         // Utilizes "Platform.runLater(<lambda function>)" to run non-thread safe logic like JavaFX code, see README.
         new Thread(() -> {
             try {
                 boolean isGameCharacter = cbGameCharacter.isSelected();
-                byte[] image = imageManager.generateImage(isGameCharacter, characteristics);
+                byte[] image = imageManager.generateImage(isGameCharacter, characteristics, additionalChar);
 
                 Platform.runLater(() -> displayImage(image));
             } catch (Exception e) {
@@ -73,8 +78,15 @@ public class GeneratorViewController {
         clearCharacteristicsFields(
                 txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
                 txtHairLength, txtEyeShape, txtEyebrowShape, txtFaceShape, txtCheekbones,
-                txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor, txtPromptBox
+                txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor
         );
+        imgAiImage.setImage(null);
+    }
+
+    @FXML
+    private void clearArea(){
+        invalidateSaveStatus();
+        clearPromptBoxArea(txtPromptBox);
         imgAiImage.setImage(null);
     }
 
@@ -83,7 +95,8 @@ public class GeneratorViewController {
         setDisableInteraction(true);
 
         HashMap<String, String> characteristicsHashMap = getCharacteristicsHashMap();
-        imageManager.saveImage(saveStatusManager.getFilename(), characteristicsHashMap, cbGameCharacter.isSelected());
+        HashMap<String, String> additionalCharHashMap = getAdditionalCharHashMap();
+        imageManager.saveImage(saveStatusManager.getFilename(), characteristicsHashMap, additionalCharHashMap, cbGameCharacter.isSelected());
         saveStatusManager.markAsSaved();
         updateWindowTitle();
 
@@ -151,7 +164,7 @@ public class GeneratorViewController {
         return getCharacteristicsFromFields(
                 txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
                 txtHairLength, txtEyeShape, txtEyebrowShape, txtFaceShape, txtCheekbones,
-                txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor, txtPromptBox
+                txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor
         );
     }
 
@@ -177,6 +190,18 @@ public class GeneratorViewController {
         return characteristics;
     }
 
+    private HashMap<String, String> getAdditionalCharHashMap() {
+        return getPromptFromArea(
+                txtPromptBox
+        );
+    }
+
+    public HashMap<String, String> getPromptFromArea(TextArea... areas) {
+        HashMap<String, String> additionalChar = new HashMap<>();
+        additionalChar.put("promptBox", areas[0].getText());
+        return additionalChar;
+    }
+
     void setCharacteristics(Characteristics characteristics) {
         txtSex.setText(characteristics.sex());
         txtRace.setText(characteristics.race());
@@ -197,14 +222,21 @@ public class GeneratorViewController {
         txtSpecies.setText(characteristics.species());
         txtSkinColor.setText(characteristics.skinColor());
 
-        txtPromptBox.setText(characteristics.promptBox());
-
         fpGameCharacterCharacteristics.setDisable(!characteristics.isGameCharacter());
+    }
+
+    void  setAdditionalChar(Characteristics additionalChar){
+        txtPromptBox.setText(additionalChar.promptBox());
     }
 
     public void clearCharacteristicsFields(TextField... fields) {
         for (TextField field : fields) {
             field.clear();
+        }
+    }
+    public void clearPromptBoxArea(TextArea... areas){
+        for(TextArea area : areas){
+            area.clear();
         }
     }
 }
