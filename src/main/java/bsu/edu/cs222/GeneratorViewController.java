@@ -21,7 +21,7 @@ public class GeneratorViewController {
     @FXML
     private TextField txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
             txtHairLength, txtEyeShape, txtEyebrowShape, txtFaceShape, txtCheekbones,
-            txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor;
+            txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor, txtPromptBox;
 
     @FXML
     private ImageView imgAiImage;
@@ -73,7 +73,7 @@ public class GeneratorViewController {
         clearCharacteristicsFields(
                 txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
                 txtHairLength, txtEyeShape, txtEyebrowShape, txtFaceShape, txtCheekbones,
-                txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor
+                txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor, txtPromptBox
         );
         imgAiImage.setImage(null);
     }
@@ -151,7 +151,7 @@ public class GeneratorViewController {
         return getCharacteristicsFromFields(
                 txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
                 txtHairLength, txtEyeShape, txtEyebrowShape, txtFaceShape, txtCheekbones,
-                txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor
+                txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor, txtPromptBox
         );
     }
 
@@ -173,6 +173,7 @@ public class GeneratorViewController {
         characteristics.put("gameType", fields[13].getText());
         characteristics.put("species", fields[14].getText());
         characteristics.put("skinColor", fields[15].getText());
+        characteristics.put("promptBox", fields[16].getText());
         return characteristics;
     }
 
@@ -195,6 +196,8 @@ public class GeneratorViewController {
         txtGameType.setText(characteristics.gameType());
         txtSpecies.setText(characteristics.species());
         txtSkinColor.setText(characteristics.skinColor());
+
+        txtPromptBox.setText(characteristics.promptBox());
 
         fpGameCharacterCharacteristics.setDisable(!characteristics.isGameCharacter());
     }
