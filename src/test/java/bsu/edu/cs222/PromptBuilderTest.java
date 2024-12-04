@@ -17,8 +17,8 @@ public class PromptBuilderTest {
     @Test
     public void testBuildPrompt() {
         String prompt = promptBuilder.buildPrompt();
-        assertEquals("25 year old male Caucasian with brown hair and blue eyes having a athletic body style. " +
-                "The character is depicted in a black and white art style and is a enemy in a FPS game. " +
-                "Human is the species. white is the color of their skin.", prompt);
+        assertEquals("25 year old male Caucasian with brown hair and blue eyes having a athletic body style" +
+                " The character is depicted in a black and white art style and is a enemy in a FPS game." +
+                " Human is the species. white is the color of their skin.", prompt);
     }
 }
