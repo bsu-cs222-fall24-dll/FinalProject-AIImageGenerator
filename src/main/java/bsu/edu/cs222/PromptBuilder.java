@@ -1,5 +1,8 @@
 package bsu.edu.cs222;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PromptBuilder {
     private final Characteristics characteristics;
 
@@ -8,44 +11,52 @@ public class PromptBuilder {
     }
 
     public String buildPrompt() {
-        StringBuilder prompt = new StringBuilder("A ");
+        List<String> promptParts = new ArrayList<>();
+        
+        addBasicDescription(promptParts);
+        addBodyFeatures(promptParts);
+        addGameRelatedInfo(promptParts);
+        addAdditionalPrompt(promptParts);
 
-        if (characteristics.age() != null) prompt.append(characteristics.age()).append(" year old ");
-        if (characteristics.sex() != null) prompt.append(characteristics.sex()).append(" ");
-        if (characteristics.race() != null) prompt.append(characteristics.race()).append(", ");
-        if (characteristics.hairColor() != null) prompt.append("with ").append(characteristics.hairColor()).append(" hair ");
+        return String.join(" ", promptParts).trim();
+    }
 
+    private void appendIfNotNull(List<String> promptParts, String value) {
+        if (value != null && value != "") {
+            promptParts.add(value);
+        }
+    }
+
+    private void addBasicDescription(List<String> promptParts) {
+        appendIfNotNull(promptParts, characteristics.age() != null ? characteristics.age() + " year old" : null);
+        appendIfNotNull(promptParts, characteristics.sex());
+        appendIfNotNull(promptParts, characteristics.race());
+        appendIfNotNull(promptParts, characteristics.hairColor() != null ? "with " + characteristics.hairColor() + " hair" : null);
         if (characteristics.eyeColor() != null) {
-            if (characteristics.hairColor() != null) prompt.append("and ");
-            else prompt.append("with ");
-
-            prompt.append(characteristics.eyeColor()).append(" eyes, ");
+            appendIfNotNull(promptParts, "and " + characteristics.eyeColor() + " eyes");
         }
+    }
 
-        if (characteristics.bodyStyle() != null) prompt.append("having a ").append(characteristics.bodyStyle()).append(" body style.");
-        else prompt.append("with an undefined body style.");
+    private void addBodyFeatures(List<String> promptParts) {
+        appendIfNotNull(promptParts, characteristics.bodyStyle() != null ? "having a " + characteristics.bodyStyle() + " body style" : null);
+        appendIfNotNull(promptParts, characteristics.hairLength() != null ? "With " + characteristics.hairLength() + " hair" : null);
+        appendIfNotNull(promptParts, characteristics.eyeShape() != null ? characteristics.eyeShape() + " shaped eyes" : null);
+        appendIfNotNull(promptParts, characteristics.eyebrowShape() != null ? characteristics.eyebrowShape() + " eyebrows" : null);
+        appendIfNotNull(promptParts, characteristics.faceShape() != null ? "a " + characteristics.faceShape() + " face" : null);
+        appendIfNotNull(promptParts, characteristics.cheekbones() != null ? characteristics.cheekbones() + " cheekbones" : null);
+    }
 
-        if (characteristics.hairLength() != null) prompt.append(" With ").append(characteristics.hairLength()).append(" hair,");
-        if (characteristics.eyeShape() != null) prompt.append(characteristics.eyeShape()).append(" shaped eyes,");
-        if (characteristics.eyebrowShape() != null) prompt.append(characteristics.eyebrowShape()).append(" eyebrows,");
-        if (characteristics.faceShape() != null) prompt.append(" a ").append(characteristics.faceShape()).append(" face, and");
-        if (characteristics.cheekbones() != null) prompt.append(characteristics.cheekbones()).append(" cheekbones.");
-
+    private void addGameRelatedInfo(List<String> promptParts) {
         if (characteristics.isGameCharacter()) {
-            prompt.append(" The character is depicted in a ");
-
-            if (characteristics.artStyle() != null) prompt.append(characteristics.artStyle()).append(" art style, ");
-            if (characteristics.characterType() != null) prompt.append("and is a ").append(characteristics.characterType()).append(" ");
-          
-            if (characteristics.gameType() != null) prompt.append("in a ").append(characteristics.gameType()).append(" game. ");
-            else prompt.append("in an unspecified type of game. ");
-          
-            if (characteristics.species() != null) prompt.append(characteristics.species()).append(" is the species. ");
-            if (characteristics.skinColor() != null) prompt.append(characteristics.skinColor()).append(" is the color of their skin. ");
+            appendIfNotNull(promptParts, "The character is depicted in a " + characteristics.artStyle() + " art style");
+            appendIfNotNull(promptParts, characteristics.characterType() != null ? "and is a " + characteristics.characterType() : null);
+            appendIfNotNull(promptParts, characteristics.gameType() != null ? "in a " + characteristics.gameType() + " game." : null);
+            appendIfNotNull(promptParts, characteristics.species() != null ? characteristics.species() + " is the species." : null);
+            appendIfNotNull(promptParts, characteristics.skinColor() != null ? characteristics.skinColor() + " is the color of their skin. " : null);
         }
+    }
 
-        if (characteristics.prompt() != null) prompt.append(characteristics.prompt());
-
-        return prompt.toString();
+    private void addAdditionalPrompt(List<String> promptParts) {
+        appendIfNotNull(promptParts, characteristics.prompt() != null ? characteristics.prompt() : null);
     }
 }
