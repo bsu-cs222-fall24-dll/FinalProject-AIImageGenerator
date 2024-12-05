@@ -29,9 +29,14 @@ class ImageLoaderTest {
 
     public String getSafePath(String pathString) {
         String os = System.getProperty("os.name").toLowerCase();
+
         if (os.contains("win")) {
             pathString = pathString.replaceFirst("/", "");
         }
+
+        // Required for path names that have spaces in them as there are formated incorrectly,
+        // therefore "redundancy" warning of "\\ " is obsolete. See README.
+        pathString = pathString.replaceAll("%20", "\\ ");
 
         return pathString;
     }
