@@ -16,7 +16,7 @@ public class ImageManager {
         imageSaver = new ImageSaver();
     }
 
-    public byte[] generateImage(boolean isGameCharacter, HashMap<String, String> characteristics, HashMap<String, String> additionalChar) throws IOException, URISyntaxException {
+    public byte[] generateImage(boolean isGameCharacter, HashMap<String, String> characteristics) throws IOException, URISyntaxException {
         Characteristics characterModel = characteristicsManager.createCharacteristics(isGameCharacter, characteristics);
 
         PromptBuilder promptBuilder = new PromptBuilder(characterModel);
@@ -24,7 +24,7 @@ public class ImageManager {
         return imageData;
     }
 
-    public void saveImage(String filename, HashMap<String, String> characteristics, HashMap<String, String> additionalCharHashMap, boolean isGameCharacter) throws IOException {
+    public void saveImage(String filename, HashMap<String, String> characteristics, boolean isGameCharacter) throws IOException {
         if (imageData == null) throw new IllegalStateException("An image must be generated before saving.");
         Characteristics characterModel = characteristicsManager.createCharacteristics(isGameCharacter, characteristics);
         String saveDirectoryPath = Config.getSaveDirectory();

@@ -284,7 +284,7 @@
                      <RowConstraints maxHeight="203.59998168945316" minHeight="10.0" prefHeight="198.7999938964844" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <Label prefHeight="18.0" prefWidth="102.0" text="Prompt Box:" />
-                  <TextArea fx:id="txtPromptBox" prefHeight="184.0" prefWidth="274.0" GridPane.rowIndex="1" />
+                  <TextArea fx:id="txtPromptBox" prefHeight="184.0" prefWidth="274.0" wrapText="true" GridPane.rowIndex="1" />
                   <FlowPane.margin>
                      <Insets top="5.0" />
                   </FlowPane.margin>

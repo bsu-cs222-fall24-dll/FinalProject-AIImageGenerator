@@ -20,21 +20,12 @@ public record Characteristics(
         String characterType,
         String gameType,
         String species,
-        String skinColor
-
-
+        String skinColor,
+        String prompt
 ) implements Serializable {
     public Characteristics(HashMap<String, String> arguments, boolean isGameCharacter) {
         this(arguments.get("sex"), arguments.get("race"), arguments.get("age"), arguments.get("hairColor"),
                 arguments.get("eyeColor"), arguments.get("bodyStyle"), arguments.get("hairLength"), arguments.get("eyeShape"), arguments.get("eyebrowShape"), arguments.get("faceShape"), arguments.get("cheekbones"), isGameCharacter, arguments.get("artStyle"),
-                arguments.get("characterType"), arguments.get("gameType"), arguments.get("species"), arguments.get("skinColor"));
+                arguments.get("characterType"), arguments.get("gameType"), arguments.get("species"), arguments.get("skinColor"), arguments.get("prompt"));
     }
-public record AdditionalChar(
-        String promptBox,
-        boolean isGameCharacter
-)implements Serializable{
-        public AdditionalChar(HashMap<String, String> arguments, boolean isGameCharacter){
-            this(arguments.get("promptBox"), isGameCharacter);
-        }
-}
 }
