@@ -41,8 +41,10 @@ public class PromptBuilder {
             else prompt.append("in an unspecified type of game. ");
           
             if (characteristics.species() != null) prompt.append(characteristics.species()).append(" is the species. ");
-            if (characteristics.skinColor() != null) prompt.append(characteristics.skinColor()).append(" is the color of their skin.");
+            if (characteristics.skinColor() != null) prompt.append(characteristics.skinColor()).append(" is the color of their skin. ");
         }
+
+        if (characteristics.prompt() != null) prompt.append(characteristics.prompt());
 
         return prompt.toString();
     }
