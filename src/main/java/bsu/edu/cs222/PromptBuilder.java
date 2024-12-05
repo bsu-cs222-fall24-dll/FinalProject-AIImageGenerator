@@ -16,12 +16,13 @@ public class PromptBuilder {
         addBasicDescription(promptParts);
         addBodyFeatures(promptParts);
         addGameRelatedInfo(promptParts);
+        addAdditionalPrompt(promptParts);
 
         return String.join(" ", promptParts).trim();
     }
 
     private void appendIfNotNull(List<String> promptParts, String value) {
-        if (value != null) {
+        if (value != null && value != "") {
             promptParts.add(value);
         }
     }
@@ -51,7 +52,11 @@ public class PromptBuilder {
             appendIfNotNull(promptParts, characteristics.characterType() != null ? "and is a " + characteristics.characterType() : null);
             appendIfNotNull(promptParts, characteristics.gameType() != null ? "in a " + characteristics.gameType() + " game." : null);
             appendIfNotNull(promptParts, characteristics.species() != null ? characteristics.species() + " is the species." : null);
-            appendIfNotNull(promptParts, characteristics.skinColor() != null ? characteristics.skinColor() + " is the color of their skin." : null);
+            appendIfNotNull(promptParts, characteristics.skinColor() != null ? characteristics.skinColor() + " is the color of their skin. " : null);
         }
+    }
+
+    private void addAdditionalPrompt(List<String> promptParts) {
+        appendIfNotNull(promptParts, characteristics.prompt() != null ? characteristics.prompt() : null);
     }
 }
