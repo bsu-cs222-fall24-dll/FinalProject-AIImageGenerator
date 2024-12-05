@@ -33,13 +33,13 @@ public class ImageItemController {
         contextMenu = new ContextMenu();
 
         MenuItem copyItem = new MenuItem("Copy");
-        copyItem.setOnAction(_ -> handleCopyImage());
+        copyItem.setOnAction(event -> handleCopyImage());
 
         MenuItem deleteItem = new MenuItem("Delete");
-        deleteItem.setOnAction(_ -> handleDeleteImage());
+        deleteItem.setOnAction(event -> handleDeleteImage());
 
         MenuItem renameItem = new MenuItem("Rename");
-        renameItem.setOnAction(_ -> handleRenameImage());
+        renameItem.setOnAction(event -> handleRenameImage());
 
         contextMenu.getItems().addAll(copyItem, deleteItem, renameItem);
 
