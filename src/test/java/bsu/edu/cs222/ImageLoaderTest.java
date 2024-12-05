@@ -34,9 +34,8 @@ class ImageLoaderTest {
             pathString = pathString.replaceFirst("/", "");
         }
 
-        // Required for path names that have spaces in them as there are formated incorrectly,
-        // therefore "redundancy" warning of "\\ " is obsolete. See README.
-        pathString = pathString.replaceAll("%20", "\\ ");
+        // Fixes incorrectly escaped space characters in the path string. ( "%20" --> "\ " )
+        pathString = pathString.replaceAll("%20", String.format("%s ", "\\"));
 
         return pathString;
     }
