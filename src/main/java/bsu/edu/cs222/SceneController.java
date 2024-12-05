@@ -20,8 +20,8 @@ public class SceneController {
         stage.setTitle(title);
     }
 
-    FXMLLoader getLoader(String sceneName) {
-        return new FXMLLoader(getClass().getResource("/" + sceneName));
+    FXMLLoader getLoader(String filename) {
+        return new FXMLLoader(getClass().getResource("/" + filename));
     }
 
     void setAndShowSceneFromParent(Parent root) throws IOException {

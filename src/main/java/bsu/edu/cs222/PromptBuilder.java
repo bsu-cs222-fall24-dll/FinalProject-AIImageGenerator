@@ -12,6 +12,7 @@ public class PromptBuilder {
 
     public String buildPrompt() {
         List<String> promptParts = new ArrayList<>();
+        
         addBasicDescription(promptParts);
         addBodyFeatures(promptParts);
         addGameRelatedInfo(promptParts);

@@ -1,0 +1,114 @@
+* {
+    -bg-color: 	#fafafa;
+    -light-color: #e4e5f1;
+    -med-color: #d2d3db;
+    -dark-color: #9394a5;
+    -darker-color: #191717;
+
+    /* Important for removing blue outline upon selecting elements */
+    -fx-focus-color: transparent;
+    -fx-font-family: "Comic Sans MS", sans-serif;
+}
+
+.text {
+    -fx-text-fill: -darker-color;
+}
+
+.view-container {
+    -fx-background-color: -bg-color;
+}
+
+/* Manager View Styles */
+
+
+
+/* Menu Bar Styles */
+
+.menu .label {
+    -fx-text-fill: -darker-color;
+}
+
+.menu-item:focused, .menu:hover {
+    -fx-background-color: -med-color;
+}
+
+.menu:hover, .menu:focused, .menu:selected{
+    -fx-background-color: -med-color;
+}
+
+.context-menu {
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em;
+    -fx-background-color: -bg-color;
+}
+
+.menu-bar {
+    -fx-background-color: -light-color;
+    -fx-border-color: -med-color;
+    -fx-border-insets: -1 0 0 -1;
+}
+
+/* Generator View Styles */
+
+TextField {
+    -fx-background-color: -med-color;
+}
+
+.image-container {
+    -fx-background-radius: 5;
+    -fx-background-color: -med-color;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane {
+    -fx-tab-min-width: 90;
+}
+
+.tab {
+    -fx-background-insets: 0 1 0 1,0,0;
+    -fx-background-radius: 5 5 0 0;
+}
+
+.tab, .tab * {
+    -fx-border-color: transparent;
+}
+
+TabPane .tab-bg {
+    -fx-background-color: -light-color;
+    -fx-background-radius: 5;
+    -fx-padding: 7.5 10 2.5 15;
+}
+
+.tab-pane .tab {
+    -fx-background-color: -med-color;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: -light-color;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: -dark-color;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: -dark-color;
+}
+
+.generate-button {
+    -fx-background-color: -dark-color;
+    -fx-text-fill: -bg-color;
+}
+
+.clear-button {
+    -fx-background-color: -med-color;
+    -fx-text-fill: -darker-color;
+}

@@ -1,12 +1,14 @@
 package bsu.edu.cs222;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -24,16 +26,16 @@ public class GeneratorViewController {
             txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor;
 
     @FXML
+    private TextArea txtPromptBox;
+
+    @FXML
     private ImageView imgAiImage;
 
     @FXML
     private CheckBox cbGameCharacter;
 
     @FXML
-    private FlowPane fpGameCharacterCharacteristics;
-
-    @FXML
-    private GridPane gpGeneratorViewContainer;
+    private FlowPane fpGeneratorViewContainer, fpGameCharacterCharacteristics;
 
     public GeneratorViewController() {
         this.imageManager = new ImageManager();
@@ -48,16 +50,26 @@ public class GeneratorViewController {
 
     @FXML
     private void generateAndSetImage() {
+        setDisableInteraction(true);
         HashMap<String, String> characteristics = getCharacteristicsHashMap();
 
-        try {
-            boolean isGameCharacter = cbGameCharacter.isSelected();
-            displayImage(imageManager.generateImage(isGameCharacter, characteristics));
-        } catch (Exception e) {
-            viewUtilities.showErrorDialogBox("Error whilst getting and fetching image!", e.getMessage());
-        } finally {
-            invalidateSaveStatus();
-        }
+        // Fetches image in a thread, preventing application from freezing.
+        // Utilizes "Platform.runLater(<lambda function>)" to run non-thread safe logic like JavaFX code, see README.
+        new Thread(() -> {
+            try {
+                boolean isGameCharacter = cbGameCharacter.isSelected();
+                byte[] image = imageManager.generateImage(isGameCharacter, characteristics);
+
+                Platform.runLater(() -> displayImage(image));
+            } catch (Exception e) {
+                Platform.runLater(() -> viewUtilities.showErrorDialogBox("Error whilst getting and fetching image!", e.toString()));
+            } finally {
+                Platform.runLater(() -> {
+                    invalidateSaveStatus();
+                    setDisableInteraction(false);
+                });
+            }
+        }).start();
     }
 
     @FXML
@@ -66,7 +78,7 @@ public class GeneratorViewController {
         clearCharacteristicsFields(
                 txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
                 txtHairLength, txtEyeShape, txtEyebrowShape, txtFaceShape, txtCheekbones,
-                txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor
+                txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor, txtPromptBox
         );
         imgAiImage.setImage(null);
     }
@@ -127,7 +139,7 @@ public class GeneratorViewController {
     }
 
     private void setDisableInteraction(boolean isDisabled) {
-        gpGeneratorViewContainer.setDisable(isDisabled);
+        fpGeneratorViewContainer.setDisable(isDisabled);
     }
 
     public void displayImage(byte[] imageData) {
@@ -144,11 +156,11 @@ public class GeneratorViewController {
         return getCharacteristicsFromFields(
                 txtSex, txtRace, txtAge, txtHairColor, txtEyeColor, txtBodyStyle,
                 txtHairLength, txtEyeShape, txtEyebrowShape, txtFaceShape, txtCheekbones,
-                txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor
+                txtArtStyle, txtCharacterType, txtGameType, txtSpecies, txtSkinColor, txtPromptBox
         );
     }
 
-    public HashMap<String, String> getCharacteristicsFromFields(TextField... fields) {
+    public HashMap<String, String> getCharacteristicsFromFields(TextInputControl... fields) {
         HashMap<String, String> characteristics = new HashMap<>();
         characteristics.put("sex", fields[0].getText());
         characteristics.put("race", fields[1].getText());
@@ -166,6 +178,7 @@ public class GeneratorViewController {
         characteristics.put("gameType", fields[13].getText());
         characteristics.put("species", fields[14].getText());
         characteristics.put("skinColor", fields[15].getText());
+        characteristics.put("prompt", fields[16].getText());
         return characteristics;
     }
 
@@ -176,25 +189,26 @@ public class GeneratorViewController {
         txtHairColor.setText(characteristics.hairColor());
         txtEyeColor.setText(characteristics.eyeColor());
         txtBodyStyle.setText(characteristics.bodyStyle());
-        txtHairLength.setText(characteristics.hairLength());
-        txtEyeShape.setText(characteristics.eyeShape());
-        txtEyebrowShape.setText(characteristics.eyebrowShape());
-        txtFaceShape.setText(characteristics.faceShape());
-        txtCheekbones.setText(characteristics.cheekbones());
 
         cbGameCharacter.setSelected(characteristics.isGameCharacter());
+        fpGameCharacterCharacteristics.setDisable(!characteristics.isGameCharacter());
         txtArtStyle.setText(characteristics.artStyle());
         txtCharacterType.setText(characteristics.characterType());
         txtGameType.setText(characteristics.gameType());
         txtSpecies.setText(characteristics.species());
         txtSkinColor.setText(characteristics.skinColor());
 
-        fpGameCharacterCharacteristics.setDisable(!characteristics.isGameCharacter());
+        txtHairLength.setText(characteristics.hairLength());
+        txtEyeShape.setText(characteristics.eyeShape());
+        txtEyebrowShape.setText(characteristics.eyebrowShape());
+        txtFaceShape.setText(characteristics.faceShape());
+        txtCheekbones.setText(characteristics.cheekbones());
+        txtPromptBox.setText(characteristics.prompt());
     }
 
-    public void clearCharacteristicsFields(TextField... fields) {
-        for (TextField field : fields) {
-            field.clear();
+    public void clearCharacteristicsFields(TextInputControl... inputs) {
+        for (TextInputControl input : inputs) {
+            input.clear();
         }
     }
 }

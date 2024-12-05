@@ -22,7 +22,6 @@ public class ManagerViewController {
         this.viewUtilities = new ViewUtilities();
     }
 
-    @FXML
     public void switchToGeneratorViewScene() {
         sceneController.switchToGeneratorView();
     }
