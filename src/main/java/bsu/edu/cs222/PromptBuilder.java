@@ -22,7 +22,7 @@ public class PromptBuilder {
     }
 
     private void appendIfNotNull(List<String> promptParts, String value) {
-        if (value != null && value != "") {
+        if (value != null && !value.isEmpty()) {
             promptParts.add(value);
         }
     }
