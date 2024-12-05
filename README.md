@@ -12,6 +12,12 @@ Warnings were suppressed for anything using the `@FXML` decorator in the view co
 were saying that they weren't being utilized or assigned, even though they were in the background 
 through JavaFX by rendering a fxml file.
 
+### CSS File Errors / Warnings
+The CSS used by JavaFX is similar but very different from what would be normally be used in a website.
+Viewing the CSS file without the special "JavaFX CSS Mode" on will cause it to be riddled with warnings and errors!
+Be rest assured that this is not the case, as if there are CSS errors, it will log them to the console and also break 
+most if not all of the styling.
+
 ### Utility warning suppressions
 There are two warnings about the parameters of a utility function always being a certain value,
 and prompts the user to make the values local to the function and get rid of the parameters. 

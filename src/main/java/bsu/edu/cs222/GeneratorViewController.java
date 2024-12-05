@@ -54,7 +54,7 @@ public class GeneratorViewController {
         HashMap<String, String> characteristics = getCharacteristicsHashMap();
 
         // Fetches image in a thread, preventing application from freezing.
-        // Utilizes "Platform.runLater(<lambda function>)" to run non-thread safe logic like JavaFX code, see README.
+        // Utilizes "Platform.runLater(<lambda function>)" to run non-thread safe logic like JavaFX code.
         new Thread(() -> {
             try {
                 boolean isGameCharacter = cbGameCharacter.isSelected();

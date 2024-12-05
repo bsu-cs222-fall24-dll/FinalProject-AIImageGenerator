@@ -33,14 +33,12 @@ public class ViewUtilities {
         showMessageAlert(title, message);
     }
 
-    /* Warnings about the parameters "always being" a certain value should be disregarded
-       as this is a utility function and is planned to be used more in the future.        */
-    String getDialogInput(String title, String message) {
+    String getFilenameDialogInput() {
         TextInputDialog textInputDialog = new TextInputDialog();
 
-        textInputDialog.setTitle(title);
-        textInputDialog.setHeaderText(title);
-        textInputDialog.setContentText(message);
+        textInputDialog.setTitle("Change filename");
+        textInputDialog.setHeaderText("Change filename");
+        textInputDialog.setContentText("Enter new filename:");
 
         textInputDialog.showAndWait();
         return textInputDialog.getEditor().getText();

@@ -39,7 +39,7 @@ public class SaveStatusManager {
     }
 
     public String promptFilenameChange() {
-        return viewUtilities.getDialogInput("Change filename", "Enter new filename:");
+        return viewUtilities.getFilenameDialogInput();
     }
 
     public boolean confirmUnsavedChanges() {
